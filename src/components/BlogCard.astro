@@ -1,0 +1,71 @@
+---
+import type { BlogPost } from '../types';
+
+export interface Props {
+  post: BlogPost;
+  featured?: boolean;
+}
+
+const { post, featured = false } = Astro.props;
+---
+
+<article
+  class={`bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow ${featured ? 'md:col-span-2' : ''}`}
+>
+  {
+    post.image && (
+      <div class='aspect-video overflow-hidden'>
+        <img
+          src={post.image}
+          alt={post.title}
+          class='w-full h-full object-cover hover:scale-105 transition-transform duration-300'
+        />
+      </div>
+    )
+  }
+
+  <div class='p-6'>
+    <div class='meta-text mb-2'>
+      <span
+        class='bg-primary-100 text-primary-800 px-2 py-1 rounded-full text-xs font-medium'
+      >
+        {post.category}
+      </span>
+      <span class='mx-2'>•</span>
+      <time datetime={post.publishDate.toISOString()}>
+        {
+          post.publishDate.toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })
+        }
+      </time>
+    </div>
+
+    <h3
+      class='card-title text-gray-900 mb-2 hover:text-primary-600 transition-colors'
+    >
+      <a href={`/blog/${post.category}/${post.slug}/`}>
+        {post.title}
+      </a>
+    </h3>
+
+    <p class='card-description mb-4 line-clamp-3'>
+      {post.description}
+    </p>
+
+    <div class='flex items-center justify-between'>
+      <span class='small-text text-gray-500'>
+        Por {post.author}
+      </span>
+
+      <a
+        href={`/blog/${post.category}/${post.slug}/`}
+        class='text-primary-600 hover:text-primary-700 font-medium text-sm transition-colors'
+      >
+        Leer más →
+      </a>
+    </div>
+  </div>
+</article>

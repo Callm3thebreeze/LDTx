@@ -1,0 +1,153 @@
+---
+import type { SiteConfig } from '../types';
+import '../styles/typography.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article' | 'product';
+  canonicalURL?: string;
+}
+
+const siteConfig: SiteConfig = {
+  title: 'LDTx - Vida Saludable',
+  description: 'Descubre productos saludables y consejos para una vida mejor. Blog especializado en cocina saludable y productos afiliados.',
+  author: 'LDTx Team',
+  url: 'https://tu-dominio.com',
+  social: {
+    email: 'contacto@tu-dominio.com'
+  }
+};
+
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+  image = '/og-image.jpg',
+  type = 'website',
+  canonicalURL = new URL(Astro.url.pathname, Astro.site)
+} = Astro.props;
+
+const pageTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.title}`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={siteConfig.author} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:site_name" content={siteConfig.title} />
+    <meta property="og:locale" content="es_ES" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site)} />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": siteConfig.title,
+        "description": siteConfig.description,
+        "url": siteConfig.url,
+        "author": {
+          "@type": "Organization",
+          "name": siteConfig.author
+        }
+      }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-white text-gray-900 font-sans">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <a href="/" class="text-2xl font-bold text-primary-600 font-serif">LDTx</a>
+          </div>
+          
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              <a href="/" class="text-gray-900 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Inicio</a>
+              <a href="/blog/" class="text-gray-500 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Blog</a>
+              <a href="/productos/" class="text-gray-500 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Productos</a>
+              <a href="/quienes-somos/" class="text-gray-500 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Quiénes Somos</a>
+              <a href="/contacto/" class="text-gray-500 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Contacto</a>
+            </div>
+          </div>
+          
+          <!-- Mobile menu button -->
+          <div class="md:hidden">
+            <button type="button" class="text-gray-500 hover:text-gray-600" aria-label="Abrir menú">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+    
+    <main>
+      <slot />
+    </main>
+    
+    <footer class="bg-gray-50 border-t">
+      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div class="col-span-1 md:col-span-2">
+            <h3 class="text-2xl font-bold text-primary-600 mb-4 font-serif">LDTx</h3>
+            <p class="text-gray-600 mb-4">
+              Tu guía para una vida más saludable. Descubre productos y consejos que transformarán tu bienestar.
+            </p>
+            <p class="text-sm text-gray-500">
+              © 2025 LDTx. Todos los derechos reservados.
+            </p>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-4">Navegación</h4>
+            <ul class="space-y-2">
+              <li><a href="/blog/" class="text-gray-600 hover:text-primary-600 transition-colors">Blog</a></li>
+              <li><a href="/productos/" class="text-gray-600 hover:text-primary-600 transition-colors">Productos</a></li>
+              <li><a href="/quienes-somos/" class="text-gray-600 hover:text-primary-600 transition-colors">Quiénes Somos</a></li>
+              <li><a href="/contacto/" class="text-gray-600 hover:text-primary-600 transition-colors">Contacto</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-4">Legal</h4>
+            <ul class="space-y-2">
+              <li><a href="/privacidad/" class="text-gray-600 hover:text-primary-600 transition-colors">Política de Privacidad</a></li>
+              <li><a href="/afiliacion/" class="text-gray-600 hover:text-primary-600 transition-colors">Política de Afiliación</a></li>
+              <li><a href="/cookies/" class="text-gray-600 hover:text-primary-600 transition-colors">Política de Cookies</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

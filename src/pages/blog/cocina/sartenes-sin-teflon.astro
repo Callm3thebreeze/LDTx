@@ -1,0 +1,229 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const post = {
+  title: 'Sartenes sin teflón: La revolución de la cocina saludable',
+  description: 'Descubre por qué cambiar a sartenes sin teflón puede transformar tu cocina y mejorar tu salud. Comparamos materiales y te damos las mejores recomendaciones.',
+  category: 'cocina',
+  publishDate: new Date('2024-12-15'),
+  author: 'María González',
+  image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=600&fit=crop',
+  tags: ['cocina saludable', 'utensilios', 'salud'],
+  readTime: '8 min'
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  type="article"
+  image={post.image}
+>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-600">
+        <li><a href="/" class="text-primary-600 hover:text-primary-700">Inicio</a></li>
+        <li class="text-gray-400">/</li>
+        <li><a href="/blog/" class="text-primary-600 hover:text-primary-700">Blog</a></li>
+        <li class="text-gray-400">/</li>
+        <li><a href="/blog/cocina/" class="text-primary-600 hover:text-primary-700">Cocina</a></li>
+        <li class="text-gray-400">/</li>
+        <li class="text-gray-600">Sartenes sin teflón</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-8">
+      <div class="flex items-center text-sm text-gray-500 mb-4">
+        <span class="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-xs font-medium">
+          {post.category}
+        </span>
+        <span class="mx-3">•</span>
+        <time datetime={post.publishDate.toISOString()}>
+          {post.publishDate.toLocaleDateString('es-ES', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          })}
+        </time>
+        <span class="mx-3">•</span>
+        <span>{post.readTime} de lectura</span>
+      </div>
+      
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        {post.title}
+      </h1>
+      
+      <p class="text-xl text-gray-600 mb-6">
+        {post.description}
+      </p>
+      
+      <div class="flex items-center text-gray-600">
+        <span>Por {post.author}</span>
+      </div>
+    </header>
+
+    <!-- Featured Image -->
+    <div class="mb-8">
+      <img 
+        src={post.image} 
+        alt={post.title}
+        class="w-full h-64 md:h-96 object-cover rounded-lg"
+      />
+    </div>
+
+    <!-- Content -->
+    <div class="prose prose-lg prose-primary max-w-none">
+      <p class="lead">
+        En los últimos años, cada vez más personas están tomando conciencia sobre los riesgos que pueden suponer los recubrimientos antiadherentes tradicionales para nuestra salud. Las sartenes sin teflón se han convertido en una alternativa cada vez más popular para quienes buscan una cocina más saludable.
+      </p>
+
+      <h2>¿Qué es el teflón y por qué debería preocuparnos?</h2>
+      
+      <p>
+        El teflón es el nombre comercial del politetrafluoroetileno (PTFE), un polímero sintético que se utiliza como recubrimiento antiadherente en muchas sartenes y utensilios de cocina. Aunque es efectivo para evitar que los alimentos se peguen, estudios recientes han planteado preocupaciones sobre su seguridad.
+      </p>
+      
+      <blockquote>
+        <p>
+          "Cuando las sartenes de teflón se calientan a temperaturas superiores a 260°C, pueden liberar gases tóxicos que son perjudiciales tanto para humanos como para mascotas."
+        </p>
+      </blockquote>
+
+      <h2>Alternativas saludables a las sartenes de teflón</h2>
+      
+      <h3>1. Sartenes de hierro fundido</h3>
+      <p>
+        El hierro fundido es una de las opciones más duraderas y naturales. Con el uso y el cuidado adecuado, desarrolla una superficie naturalmente antiadherente y puede durar toda la vida.
+      </p>
+
+      <ul>
+        <li><strong>Ventajas:</strong> Retención excelente del calor, durabilidad, mejora con el uso</li>
+        <li><strong>Desventajas:</strong> Requiere mantenimiento regular, puede ser pesado</li>
+      </ul>
+
+      <h3>2. Sartenes de acero inoxidable</h3>
+      <p>
+        Las sartenes de acero inoxidable son duraderas, no reactivas y seguras para usar a altas temperaturas. Aunque no son antiadherentes por naturaleza, con la técnica adecuada se pueden obtener excelentes resultados.
+      </p>
+
+      <h3>3. Sartenes de cerámica</h3>
+      <p>
+        Los recubrimientos cerámicos ofrecen propiedades antiadherentes sin los químicos sintéticos del teflón. Son ideales para cocinar a temperaturas medias y bajas.
+      </p>
+
+      <h2>Consejos para hacer la transición</h2>
+      
+      <ol>
+        <li><strong>Ajusta tus técnicas de cocina:</strong> Las sartenes sin teflón pueden requerir ligeramente más aceite o grasa</li>
+        <li><strong>Controla la temperatura:</strong> La mayoría de las alternativas funcionan mejor a temperaturas medias</li>
+        <li><strong>Precalienta adecuadamente:</strong> Permite que la sartén se caliente gradualmente antes de añadir los alimentos</li>
+        <li><strong>Usa utensilios apropiados:</strong> Evita utensilios metálicos en sartenes de cerámica</li>
+      </ol>
+
+      <h2>Productos recomendados</h2>
+      
+      <p>
+        Basándonos en nuestra investigación y pruebas, estas son nuestras recomendaciones principales para sartenes sin teflón:
+      </p>
+
+      <div class="bg-primary-50 p-6 rounded-lg my-8">
+        <h4 class="text-lg font-semibold text-primary-800 mb-3">🏆 Nuestra selección top</h4>
+        <p class="text-primary-700">
+          Hemos seleccionado cuidadosamente los mejores productos basándonos en criterios de seguridad, durabilidad y rendimiento. 
+          <a href="/productos/cocina/sartenes/" class="font-medium hover:underline">Ver nuestras recomendaciones completas</a>
+        </p>
+      </div>
+
+      <h2>Conclusión</h2>
+      
+      <p>
+        Hacer el cambio a sartenes sin teflón es una decisión inteligente para tu salud y la de tu familia. Aunque puede requerir un pequeño período de adaptación, los beneficios a largo plazo superan con creces cualquier inconveniente inicial.
+      </p>
+      
+      <p>
+        Recuerda que la clave está en elegir productos de calidad y aprender las técnicas adecuadas para cada tipo de material. Con el tiempo, descubrirás que cocinar sin teflón no solo es más saludable, sino que también puede ser más satisfactorio.
+      </p>
+    </div>
+
+    <!-- Tags -->
+    <div class="mt-8 pt-8 border-t border-gray-200">
+      <h3 class="text-lg font-semibold text-gray-900 mb-3">Etiquetas</h3>
+      <div class="flex flex-wrap gap-2">
+        {post.tags.map((tag) => (
+          <span class="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm">
+            #{tag.replace(' ', '-')}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Related articles -->
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <h3 class="text-2xl font-bold text-gray-900 mb-6">Artículos relacionados</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <a href="/blog/cocina/aceites-saludables-guia/" class="group">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            <img 
+              src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=200&fit=crop" 
+              alt="Aceites saludables"
+              class="w-full h-32 object-cover"
+            />
+            <div class="p-4">
+              <h4 class="font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
+                Aceites saludables: Guía completa
+              </h4>
+              <p class="text-gray-600 text-sm mt-1">
+                Todo sobre aceites saludables para tu cocina
+              </p>
+            </div>
+          </div>
+        </a>
+        
+        <a href="/blog/cocina/utensilios-libres-toxicos-guia/" class="group">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            <img 
+              src="https://images.unsplash.com/photo-1556909045-f3c21bf5a3a8?w=400&h=200&fit=crop" 
+              alt="Utensilios libres de tóxicos"
+              class="w-full h-32 object-cover"
+            />
+            <div class="p-4">
+              <h4 class="font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
+                Utensilios libres de tóxicos
+              </h4>
+              <p class="text-gray-600 text-sm mt-1">
+                Guía para elegir utensilios seguros
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": post.title,
+      "description": post.description,
+      "image": post.image,
+      "author": {
+        "@type": "Person",
+        "name": post.author
+      },
+      "datePublished": post.publishDate.toISOString(),
+      "dateModified": post.publishDate.toISOString(),
+      "publisher": {
+        "@type": "Organization",
+        "name": "LDTx",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://tu-dominio.com/logo.png"
+        }
+      }
+    }
+  </script>
+</BaseLayout>

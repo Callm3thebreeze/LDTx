@@ -1,0 +1,306 @@
+---
+// Update the path below to the correct location of BaseLayout.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const product = {
+  id: '1',
+  name: 'Sartén Cerámica Premium 28cm',
+  description: 'Sartén antiadherente de cerámica libre de PFOA y PTFE. Perfecta para una cocina saludable con distribución uniforme del calor.',
+  category: 'cocina',
+  subcategory: 'sartenes',
+  price: 59.99,
+  originalPrice: 79.99,
+  affiliateLink: 'https://ejemplo.com/sarten-ceramica',
+  image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=800&fit=crop',
+  images: [
+    'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1556909045-f3c21bf5a3a8?w=800&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1556909114-df4d98e29e6d?w=800&h=800&fit=crop'
+  ],
+  rating: 4.8,
+  reviews: 124,
+  features: [
+    'Libre de PFOA, PTFE y otros químicos tóxicos',
+    'Recubrimiento cerámico duradero',
+    'Distribución uniforme del calor',
+    'Fácil limpieza y mantenimiento',
+    'Compatible con todos los tipos de cocina',
+    'Mango ergonómico resistente al calor'
+  ],
+  specifications: {
+    'Diámetro': '28 cm',
+    'Material': 'Aluminio forjado con recubrimiento cerámico',
+    'Peso': '1.2 kg',
+    'Altura': '5 cm',
+    'Mango': 'Acero inoxidable con aislamiento térmico',
+    'Compatibilidad': 'Gas, eléctrico, vitrocerámica, inducción'
+  },
+  tags: ['cerámica', 'antiadherente', 'saludable', 'sin-toxicos'],
+  inStock: true,
+  brand: 'GreenCook',
+  warranty: '2 años'
+};
+
+const relatedProducts = [
+  {
+    name: 'Sartén de Hierro Fundido 26cm',
+    slug: 'sarten-hierro-fundido-26cm',
+    price: 89.99,
+    image: 'https://images.unsplash.com/photo-1556909045-f3c21bf5a3a8?w=400&h=400&fit=crop',
+    rating: 4.9
+  },
+  {
+    name: 'Juego de Cuchillos de Acero Inoxidable',
+    slug: 'juego-cuchillos-acero-inoxidable',
+    price: 129.99,
+    image: 'https://images.unsplash.com/photo-1593618998160-e34014e67546?w=400&h=400&fit=crop',
+    rating: 4.6
+  }
+];
+---
+
+<BaseLayout
+  title={`${product.name} - LDTx`}
+  description={product.description}
+  type="product"
+  image={product.image}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-gray-600">
+        <li><a href="/" class="text-primary-600 hover:text-primary-700">Inicio</a></li>
+        <li class="text-gray-400">/</li>
+        <li><a href="/productos/" class="text-primary-600 hover:text-primary-700">Productos</a></li>
+        <li class="text-gray-400">/</li>
+        <li><a href="/productos/cocina/" class="text-primary-600 hover:text-primary-700">Cocina</a></li>
+        <li class="text-gray-400">/</li>
+        <li class="text-gray-600">{product.name}</li>
+      </ol>
+    </nav>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Imágenes del producto -->
+      <div>
+        <div class="aspect-square mb-4">
+          <img 
+            src={product.image} 
+            alt={product.name}
+            class="w-full h-full object-cover rounded-lg"
+          />
+        </div>
+        
+        {product.images && product.images.length > 1 && (
+          <div class="grid grid-cols-3 gap-2">
+            {product.images.slice(0, 3).map((img, index) => (
+              <img 
+                src={img} 
+                alt={`${product.name} - Vista ${index + 1}`}
+                class="aspect-square object-cover rounded-md cursor-pointer hover:opacity-80 transition-opacity"
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      <!-- Información del producto -->
+      <div>
+        <div class="mb-4">
+          <span class="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm font-medium">
+            {product.category}
+          </span>
+        </div>
+
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          {product.name}
+        </h1>
+
+        {product.rating && (
+          <div class="flex items-center mb-4">
+            <div class="flex items-center">
+              {Array.from({ length: 5 }, (_, i) => (
+                <span class={`text-lg ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`}>
+                  ★
+                </span>
+              ))}
+            </div>
+            <span class="ml-2 text-gray-600">
+              {product.rating} ({product.reviews} reseñas)
+            </span>
+          </div>
+        )}
+
+        <p class="text-lg text-gray-600 mb-6">
+          {product.description}
+        </p>
+
+        <!-- Precio -->
+        <div class="mb-6">
+          <div class="flex items-center space-x-3">
+            <span class="text-3xl font-bold text-primary-600">
+              {product.price.toFixed(2)}€
+            </span>
+            {product.originalPrice && (
+              <>
+                <span class="text-xl text-gray-400 line-through">
+                  {product.originalPrice.toFixed(2)}€
+                </span>
+                <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-sm font-medium">
+                  -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
+                </span>
+              </>
+            )}
+          </div>
+        </div>
+
+        <!-- Estado del stock -->
+        <div class="mb-6">
+          <span class={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+            product.inStock 
+              ? 'bg-green-100 text-green-800' 
+              : 'bg-red-100 text-red-800'
+          }`}>
+            {product.inStock ? '✓ En stock' : '✗ Agotado'}
+          </span>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="flex space-x-4 mb-8">
+          <a 
+            href={product.affiliateLink}
+            target="_blank"
+            rel="nofollow noopener"
+            class="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg text-center transition-colors"
+          >
+            Comprar ahora
+          </a>
+          <button class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-lg transition-colors">
+            💝 Guardar
+          </button>
+        </div>
+
+        <!-- Características principales -->
+        <div class="mb-8">
+          <h3 class="text-lg font-semibold text-gray-900 mb-3">Características principales</h3>
+          <ul class="space-y-2">
+            {product.features.map((feature) => (
+              <li class="flex items-start">
+                <span class="text-primary-600 mr-2">✓</span>
+                <span class="text-gray-700">{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Garantía y marca -->
+        <div class="grid grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg">
+          <div>
+            <span class="text-sm text-gray-500">Marca</span>
+            <p class="font-medium text-gray-900">{product.brand}</p>
+          </div>
+          <div>
+            <span class="text-sm text-gray-500">Garantía</span>
+            <p class="font-medium text-gray-900">{product.warranty}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Especificaciones técnicas -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Especificaciones técnicas</h2>
+      <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+        <table class="w-full">
+          <tbody class="divide-y divide-gray-200">
+            {Object.entries(product.specifications).map(([key, value]) => (
+              <tr>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900 bg-gray-50 w-1/3">
+                  {key}
+                </td>
+                <td class="px-6 py-4 text-sm text-gray-700">
+                  {value}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Productos relacionados -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Productos relacionados</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {relatedProducts.map((relatedProduct) => (
+          <a href={`/producto/${relatedProduct.slug}/`} class="group">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+              <div class="aspect-square overflow-hidden">
+                <img 
+                  src={relatedProduct.image} 
+                  alt={relatedProduct.name}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div class="p-4">
+                <h3 class="font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+                  {relatedProduct.name}
+                </h3>
+                <div class="flex items-center justify-between">
+                  <span class="text-lg font-bold text-primary-600">
+                    {relatedProduct.price.toFixed(2)}€
+                  </span>
+                  <div class="flex items-center">
+                    <span class="text-yellow-400">★</span>
+                    <span class="ml-1 text-sm text-gray-600">{relatedProduct.rating}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Aviso sobre enlaces de afiliado -->
+    <section class="mt-16 bg-blue-50 border border-blue-200 rounded-lg p-6">
+      <h3 class="text-lg font-semibold text-blue-900 mb-2">
+        ℹ️ Información sobre enlaces de afiliado
+      </h3>
+      <p class="text-blue-800 text-sm">
+        Este producto incluye enlaces de afiliado. Cuando realizas una compra a través de estos enlaces, 
+        recibimos una pequeña comisión sin coste adicional para ti. Esto nos ayuda a mantener el sitio 
+        y seguir ofreciendo recomendaciones de calidad.
+        <a href="/afiliacion/" class="font-medium hover:underline ml-1">
+          Más información sobre nuestra política de afiliación
+        </a>
+      </p>
+    </section>
+  </div>
+
+  <!-- Schema.org structured data para productos -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": product.name,
+      "description": product.description,
+      "image": product.image,
+      "brand": {
+        "@type": "Brand",
+        "name": product.brand
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": product.price,
+        "priceCurrency": "EUR",
+        "availability": product.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+        "url": product.affiliateLink
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": product.rating,
+        "reviewCount": product.reviews
+      }
+    }
+  </script>
+</BaseLayout>

@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogCard from '../components/BlogCard.astro';
+import ProductCard from '../components/ProductCard.astro';
+import type { BlogPost, Product } from '../types';
+
+// Datos de ejemplo para el blog
+const featuredPosts: BlogPost[] = [
+  {
+    id: '1',
+    title: 'Sartenes sin teflón: La revolución de la cocina saludable',
+    description:
+      'Descubre por qué cambiar a sartenes sin teflón puede transformar tu cocina y mejorar tu salud.',
+    category: 'cocina',
+    slug: 'sartenes-sin-teflon',
+    publishDate: new Date('2024-12-15'),
+    author: 'María González',
+    image:
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop',
+    tags: ['cocina saludable', 'utensilios', 'salud'],
+    content: '',
+    featured: true,
+  },
+  {
+    id: '2',
+    title: 'Aceites saludables: Guía completa para una cocina nutritiva',
+    description:
+      'Todo lo que necesitas saber sobre aceites saludables y cómo incorporarlos en tu dieta diaria.',
+    category: 'cocina',
+    slug: 'aceites-saludables-guia',
+    publishDate: new Date('2024-12-10'),
+    author: 'Carlos Ruiz',
+    image:
+      'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&h=600&fit=crop',
+    tags: ['aceites', 'nutrición', 'cocina'],
+    content: '',
+    featured: true,
+  },
+];
+
+// Datos de ejemplo para productos
+const featuredProducts: Product[] = [
+  {
+    id: '1',
+    name: 'Sartén Cerámica Premium 28cm',
+    description:
+      'Sartén antiadherente de cerámica libre de PFOA y PTFE. Perfecta para una cocina saludable.',
+    category: 'cocina',
+    subcategory: 'sartenes',
+    slug: 'sarten-ceramica-premium-28cm',
+    price: 59.99,
+    originalPrice: 79.99,
+    affiliateLink: 'https://ejemplo.com/sarten-ceramica',
+    image:
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=600&fit=crop',
+    rating: 4.8,
+    reviews: 124,
+    features: [
+      'Libre de tóxicos',
+      'Fácil limpieza',
+      'Distribución uniforme del calor',
+    ],
+    tags: ['cerámica', 'antiadherente', 'saludable'],
+    inStock: true,
+    featured: true,
+  },
+  {
+    id: '2',
+    name: 'Aceite de Oliva Virgen Extra Ecológico',
+    description:
+      'Aceite de oliva virgen extra de primera presión en frío. Sabor intenso y propiedades saludables.',
+    category: 'alimentacion',
+    slug: 'aceite-oliva-virgen-extra-ecologico',
+    price: 24.99,
+    affiliateLink: 'https://ejemplo.com/aceite-oliva',
+    image:
+      'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=600&h=600&fit=crop',
+    rating: 4.9,
+    reviews: 89,
+    features: [
+      'Certificado ecológico',
+      'Primera presión en frío',
+      'Rico en antioxidantes',
+    ],
+    tags: ['aceite', 'ecológico', 'virgen extra'],
+    inStock: true,
+    featured: true,
+  },
+];
+---
+
+<BaseLayout
+  title='LDTx - Tu guía para una vida saludable'
+  description='Descubre productos saludables y consejos para transformar tu bienestar. Blog especializado en cocina saludable y productos afiliados cuidadosamente seleccionados.'
+>
+  <!-- Hero Section -->
+  <section
+    class='bg-gradient-to-br from-primary-50 to-primary-100 py-16 lg:py-24'
+  >
+    <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='text-center'>
+        <h1 class='hero-title text-gray-900 mb-6'>
+          Tu guía para una
+          <span class='text-primary-600'>vida saludable</span>
+        </h1>
+        <p class='lead-text text-gray-600 mb-8 max-w-3xl mx-auto'>
+          Descubre productos cuidadosamente seleccionados y consejos expertos
+          para transformar tu bienestar y el de tu familia.
+        </p>
+        <div class='flex flex-col sm:flex-row gap-4 justify-center'>
+          <a
+            href='/blog/'
+            class='bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors'
+          >
+            Explorar Blog
+          </a>
+          <a
+            href='/productos/'
+            class='bg-white hover:bg-gray-50 text-primary-600 font-semibold py-3 px-8 rounded-lg border-2 border-primary-600 transition-colors'
+          >
+            Ver Productos
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Section -->
+  <section class='py-16 bg-white'>
+    <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='text-center mb-12'>
+        <h2 class='title-section text-gray-900 mb-4'>
+          Últimos artículos del blog
+        </h2>
+        <p class='body-text text-gray-600 max-w-2xl mx-auto'>
+          Consejos, guías y recomendaciones para llevar un estilo de vida más
+          saludable
+        </p>
+      </div>
+
+      <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8'>
+        {featuredPosts.map((post) => <BlogCard post={post} />)}
+
+        <!-- Teaser card para más artículos -->
+        <div
+          class='bg-primary-50 rounded-lg p-6 flex flex-col justify-center items-center text-center'
+        >
+          <h3 class='text-xl font-semibold text-gray-900 mb-2'>
+            Y muchos más artículos
+          </h3>
+          <p class='text-gray-600 mb-4'>
+            Descubre todos nuestros consejos sobre cocina saludable, nutrición y
+            bienestar
+          </p>
+          <a
+            href='/blog/'
+            class='bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-6 rounded-lg transition-colors'
+          >
+            Ver todos los artículos
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section class='py-16 bg-gray-50'>
+    <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='text-center mb-12'>
+        <h2 class='title-section text-gray-900 mb-4'>Productos recomendados</h2>
+        <p class='body-text text-gray-600 max-w-2xl mx-auto'>
+          Productos cuidadosamente seleccionados para mejorar tu salud y
+          bienestar
+        </p>
+      </div>
+
+      <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8'>
+        {featuredProducts.map((product) => <ProductCard product={product} />)}
+
+        <!-- Teaser card para más productos -->
+        <div
+          class='bg-white rounded-lg p-6 flex flex-col justify-center items-center text-center shadow-md'
+        >
+          <h3 class='text-xl font-semibold text-gray-900 mb-2'>
+            Catálogo completo
+          </h3>
+          <p class='text-gray-600 mb-4'>
+            Explora nuestra selección completa de productos para una vida
+            saludable
+          </p>
+          <a
+            href='/productos/'
+            class='bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-6 rounded-lg transition-colors'
+          >
+            Ver todos los productos
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class='py-16 bg-primary-600'>
+    <div class='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
+      <h2 class='title-section text-white mb-4'>
+        ¿Listo para transformar tu estilo de vida?
+      </h2>
+      <p class='lead-text text-primary-100 mb-8'>
+        Únete a nuestra comunidad y recibe consejos semanales sobre vida
+        saludable
+      </p>
+      <a
+        href='/contacto/'
+        class='bg-white hover:bg-gray-100 text-primary-600 font-semibold py-3 px-8 rounded-lg transition-colors inline-block'
+      >
+        Contáctanos
+      </a>
+    </div>
+  </section>
+</BaseLayout>

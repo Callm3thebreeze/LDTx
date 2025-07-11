@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import type { BlogPost } from '../../../types';
+
+// Artículos de la categoría cocina
+const cocinaPosts: BlogPost[] = [
+  {
+    id: '1',
+    title: 'Sartenes sin teflón: La revolución de la cocina saludable',
+    description:
+      'Descubre por qué cambiar a sartenes sin teflón puede transformar tu cocina y mejorar tu salud. Comparamos materiales y te damos las mejores recomendaciones.',
+    category: 'cocina',
+    slug: 'sartenes-sin-teflon',
+    publishDate: new Date('2024-12-15'),
+    author: 'María González',
+    image:
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop',
+    tags: ['cocina saludable', 'utensilios', 'salud'],
+    content: '',
+    featured: true,
+  },
+  {
+    id: '2',
+    title: 'Aceites saludables: Guía completa para una cocina nutritiva',
+    description:
+      'Todo lo que necesitas saber sobre aceites saludables y cómo incorporarlos en tu dieta diaria para maximizar sus beneficios.',
+    category: 'cocina',
+    slug: 'aceites-saludables-guia',
+    publishDate: new Date('2024-12-10'),
+    author: 'Carlos Ruiz',
+    image:
+      'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&h=600&fit=crop',
+    tags: ['aceites', 'nutrición', 'cocina'],
+    content: '',
+  },
+  {
+    id: '3',
+    title: 'Utensilios de cocina libres de tóxicos: Guía de compra',
+    description:
+      'Aprende a identificar y elegir utensilios de cocina que no comprometan tu salud ni la de tu familia.',
+    category: 'cocina',
+    slug: 'utensilios-libres-toxicos-guia',
+    publishDate: new Date('2024-12-05'),
+    author: 'Ana Martín',
+    image:
+      'https://images.unsplash.com/photo-1556909045-f3c21bf5a3a8?w=800&h=600&fit=crop',
+    tags: ['utensilios', 'salud', 'cocina'],
+    content: '',
+  },
+];
+---
+
+<BaseLayout
+  title='Cocina Saludable - Blog LDTx'
+  description='Descubre consejos y guías sobre cocina saludable. Aprende sobre utensilios libres de tóxicos, aceites saludables y técnicas de cocción nutritivas.'
+>
+  <div class='bg-primary-50 py-12'>
+    <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='text-center'>
+        <nav class='mb-4'>
+          <ol class='flex items-center justify-center space-x-2 text-sm'>
+            <li>
+              <a href='/' class='text-primary-600 hover:text-primary-700'
+                >Inicio</a>
+            </li>
+            <li class='text-gray-400'>/</li>
+            <li>
+              <a href='/blog/' class='text-primary-600 hover:text-primary-700'
+                >Blog</a>
+            </li>
+            <li class='text-gray-400'>/</li>
+            <li class='text-gray-600'>Cocina</li>
+          </ol>
+        </nav>
+
+        <h1 class='text-4xl md:text-5xl font-bold text-gray-900 mb-4'>
+          Cocina saludable
+        </h1>
+        <p class='text-xl text-gray-600 max-w-2xl mx-auto'>
+          Consejos, técnicas y recomendaciones para transformar tu cocina en un
+          espacio más saludable
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
+    <!-- Navegación de categorías -->
+    <div class='mb-8'>
+      <h2 class='text-2xl font-bold text-gray-900 mb-4'>Categorías del blog</h2>
+      <div class='flex flex-wrap gap-2'>
+        <a
+          href='/blog/'
+          class='bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-full text-sm font-medium transition-colors'
+        >
+          Todos los artículos
+        </a>
+        <span
+          class='bg-primary-100 text-primary-800 px-4 py-2 rounded-full text-sm font-medium'
+        >
+          Cocina saludable
+        </span>
+        <a
+          href='/blog/nutricion/'
+          class='bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-full text-sm font-medium transition-colors'
+        >
+          Nutrición
+        </a>
+      </div>
+    </div>
+
+    <!-- Artículos de cocina -->
+    <section>
+      <h2 class='text-2xl font-bold text-gray-900 mb-6'>
+        Artículos sobre cocina saludable
+        <span class='text-lg font-normal text-gray-600'
+          >({cocinaPosts.length} artículos)</span
+        >
+      </h2>
+
+      <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+        {cocinaPosts.map((post) => <BlogCard post={post} />)}
+      </div>
+    </section>
+
+    <!-- Temas relacionados -->
+    <section class='mt-16'>
+      <h3 class='text-xl font-bold text-gray-900 mb-4'>
+        Temas populares en cocina saludable
+      </h3>
+      <div class='flex flex-wrap gap-2'>
+        <span
+          class='bg-primary-50 text-primary-700 px-3 py-1 rounded-full text-sm'
+          >#sartenes-sin-teflon</span
+        >
+        <span
+          class='bg-primary-50 text-primary-700 px-3 py-1 rounded-full text-sm'
+          >#aceites-saludables</span
+        >
+        <span
+          class='bg-primary-50 text-primary-700 px-3 py-1 rounded-full text-sm'
+          >#utensilios-libres-toxicos</span
+        >
+        <span
+          class='bg-primary-50 text-primary-700 px-3 py-1 rounded-full text-sm'
+          >#cocina-nutritiva</span
+        >
+        <span
+          class='bg-primary-50 text-primary-700 px-3 py-1 rounded-full text-sm'
+          >#técnicas-de-cocción</span
+        >
+      </div>
+    </section>
+  </div>
+</BaseLayout>

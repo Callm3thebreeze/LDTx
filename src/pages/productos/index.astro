@@ -1,0 +1,236 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import type { Product, Category } from '../../types';
+
+// Categorías de productos
+const categories: Category[] = [
+  {
+    id: '1',
+    name: 'Cocina',
+    slug: 'cocina',
+    description: 'Utensilios y electrodomésticos para una cocina saludable',
+    image:
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop',
+  },
+  {
+    id: '2',
+    name: 'Alimentación',
+    slug: 'alimentacion',
+    description: 'Productos alimenticios saludables y naturales',
+    image:
+      'https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=400&h=300&fit=crop',
+  },
+  {
+    id: '3',
+    name: 'Bienestar',
+    slug: 'bienestar',
+    description: 'Productos para el cuidado personal y bienestar',
+    image:
+      'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop',
+  },
+];
+
+// Productos destacados
+const featuredProducts: Product[] = [
+  {
+    id: '1',
+    name: 'Sartén Cerámica Premium 28cm',
+    description:
+      'Sartén antiadherente de cerámica libre de PFOA y PTFE. Perfecta para una cocina saludable.',
+    category: 'cocina',
+    subcategory: 'sartenes',
+    slug: 'sarten-ceramica-premium-28cm',
+    price: 59.99,
+    originalPrice: 79.99,
+    affiliateLink: 'https://ejemplo.com/sarten-ceramica',
+    image:
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=600&fit=crop',
+    rating: 4.8,
+    reviews: 124,
+    features: [
+      'Libre de tóxicos',
+      'Fácil limpieza',
+      'Distribución uniforme del calor',
+    ],
+    tags: ['cerámica', 'antiadherente', 'saludable'],
+    inStock: true,
+    featured: true,
+  },
+  {
+    id: '2',
+    name: 'Aceite de Oliva Virgen Extra Ecológico',
+    description:
+      'Aceite de oliva virgen extra de primera presión en frío. Sabor intenso y propiedades saludables.',
+    category: 'alimentacion',
+    slug: 'aceite-oliva-virgen-extra-ecologico',
+    price: 24.99,
+    affiliateLink: 'https://ejemplo.com/aceite-oliva',
+    image:
+      'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=600&h=600&fit=crop',
+    rating: 4.9,
+    reviews: 89,
+    features: [
+      'Certificado ecológico',
+      'Primera presión en frío',
+      'Rico en antioxidantes',
+    ],
+    tags: ['aceite', 'ecológico', 'virgen extra'],
+    inStock: true,
+    featured: true,
+  },
+  {
+    id: '3',
+    name: 'Batidora de Vaso Sin BPA',
+    description:
+      'Batidora de vaso de alta potencia con jarra libre de BPA. Ideal para smoothies y batidos saludables.',
+    category: 'cocina',
+    subcategory: 'electrodomesticos',
+    slug: 'batidora-vaso-sin-bpa',
+    price: 149.99,
+    originalPrice: 199.99,
+    affiliateLink: 'https://ejemplo.com/batidora',
+    image:
+      'https://images.unsplash.com/photo-1585515656845-3cfe1e19c0d4?w=600&h=600&fit=crop',
+    rating: 4.7,
+    reviews: 256,
+    features: ['Sin BPA', 'Alta potencia', '10 velocidades'],
+    tags: ['batidora', 'sin-bpa', 'smoothies'],
+    inStock: true,
+    featured: true,
+  },
+  {
+    id: '4',
+    name: 'Aceite de Coco Virgen Orgánico',
+    description:
+      'Aceite de coco virgen extra de cultivo orgánico. Perfecto para cocinar y cuidado personal.',
+    category: 'alimentacion',
+    slug: 'aceite-coco-virgen-organico',
+    price: 18.99,
+    affiliateLink: 'https://ejemplo.com/aceite-coco',
+    image:
+      'https://images.unsplash.com/photo-1471954812385-7ad1b4f0b6e7?w=600&h=600&fit=crop',
+    rating: 4.6,
+    reviews: 78,
+    features: ['Orgánico certificado', 'Virgen extra', 'Múltiples usos'],
+    tags: ['aceite de coco', 'orgánico', 'natural'],
+    inStock: true,
+  },
+];
+---
+
+<BaseLayout
+  title='Productos Saludables - Catálogo LDTx'
+  description='Descubre nuestra selección de productos saludables cuidadosamente elegidos. Utensilios de cocina libres de tóxicos, alimentos orgánicos y productos de bienestar.'
+>
+  <div class='bg-primary-50 py-12'>
+    <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='text-center'>
+        <h1 class='text-4xl md:text-5xl font-bold text-gray-900 mb-4'>
+          Productos saludables
+        </h1>
+        <p class='text-xl text-gray-600 max-w-2xl mx-auto'>
+          Productos cuidadosamente seleccionados para mejorar tu salud y
+          bienestar. Todos nuestros productos son afiliados de confianza.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
+    <!-- Categorías -->
+    <section class='mb-16'>
+      <h2 class='text-3xl font-bold text-gray-900 mb-8 text-center'>
+        Explora por categorías
+      </h2>
+
+      <div class='grid grid-cols-1 md:grid-cols-3 gap-8'>
+        {
+          categories.map((category) => (
+            <a
+              href={`/productos/${category.slug}/`}
+              class='group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow'
+            >
+              <div class='aspect-video overflow-hidden'>
+                <img
+                  src={category.image}
+                  alt={category.name}
+                  class='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
+                />
+              </div>
+              <div class='p-6'>
+                <h3 class='text-xl font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors'>
+                  {category.name}
+                </h3>
+                <p class='text-gray-600'>{category.description}</p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Productos destacados -->
+    <section class='mb-16'>
+      <div class='text-center mb-8'>
+        <h2 class='text-3xl font-bold text-gray-900 mb-4'>
+          Productos destacados
+        </h2>
+        <p class='text-lg text-gray-600'>
+          Nuestras recomendaciones principales para una vida más saludable
+        </p>
+      </div>
+
+      <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
+        {featuredProducts.map((product) => <ProductCard product={product} />)}
+      </div>
+    </section>
+
+    <!-- Call to action -->
+    <section
+      class='bg-primary-600 rounded-2xl p-8 md:p-12 text-center text-white'
+    >
+      <h2 class='text-2xl md:text-3xl font-bold mb-4'>
+        ¿Buscas algo específico?
+      </h2>
+      <p class='text-primary-100 mb-6 max-w-2xl mx-auto'>
+        Navega por nuestras categorías especializadas o contáctanos si necesitas
+        recomendaciones personalizadas
+      </p>
+      <div class='flex flex-col sm:flex-row gap-4 justify-center'>
+        <a
+          href='/productos/cocina/'
+          class='bg-white hover:bg-gray-100 text-primary-600 font-semibold py-3 px-6 rounded-lg transition-colors'
+        >
+          Ver productos de cocina
+        </a>
+        <a
+          href='/contacto/'
+          class='bg-primary-700 hover:bg-primary-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors border border-primary-500'
+        >
+          Contactar para asesoramiento
+        </a>
+      </div>
+    </section>
+
+    <!-- Información sobre afiliación -->
+    <section class='mt-16 bg-gray-50 rounded-lg p-6'>
+      <h3 class='text-lg font-semibold text-gray-900 mb-3'>
+        ℹ️ Sobre nuestros productos
+      </h3>
+      <p class='text-gray-600 text-sm'>
+        Todos los productos que recomendamos han sido cuidadosamente
+        seleccionados por nuestro equipo. Como afiliados, ganamos una pequeña
+        comisión cuando realizas una compra a través de nuestros enlaces, sin
+        coste adicional para ti. Esto nos ayuda a mantener el sitio y seguir
+        ofreciendo contenido de calidad.
+        <a
+          href='/afiliacion/'
+          class='text-primary-600 hover:text-primary-700 font-medium ml-1'
+        >
+          Más información sobre nuestra política de afiliación
+        </a>
+      </p>
+    </section>
+  </div>
+</BaseLayout>

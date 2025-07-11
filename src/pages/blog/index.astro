@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import type { BlogPost } from '../../types';
+
+// Datos de ejemplo del blog
+const blogPosts: BlogPost[] = [
+  {
+    id: '1',
+    title: 'Sartenes sin teflón: La revolución de la cocina saludable',
+    description:
+      'Descubre por qué cambiar a sartenes sin teflón puede transformar tu cocina y mejorar tu salud. Comparamos materiales y te damos las mejores recomendaciones.',
+    category: 'cocina',
+    slug: 'sartenes-sin-teflon',
+    publishDate: new Date('2024-12-15'),
+    author: 'María González',
+    image:
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop',
+    tags: ['cocina saludable', 'utensilios', 'salud'],
+    content: '',
+    featured: true,
+  },
+  {
+    id: '2',
+    title: 'Aceites saludables: Guía completa para una cocina nutritiva',
+    description:
+      'Todo lo que necesitas saber sobre aceites saludables y cómo incorporarlos en tu dieta diaria para maximizar sus beneficios.',
+    category: 'cocina',
+    slug: 'aceites-saludables-guia',
+    publishDate: new Date('2024-12-10'),
+    author: 'Carlos Ruiz',
+    image:
+      'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&h=600&fit=crop',
+    tags: ['aceites', 'nutrición', 'cocina'],
+    content: '',
+  },
+  {
+    id: '3',
+    title: 'Utensilios de cocina libres de tóxicos: Guía de compra',
+    description:
+      'Aprende a identificar y elegir utensilios de cocina que no comprometan tu salud ni la de tu familia.',
+    category: 'cocina',
+    slug: 'utensilios-libres-toxicos-guia',
+    publishDate: new Date('2024-12-05'),
+    author: 'Ana Martín',
+    image:
+      'https://images.unsplash.com/photo-1556909045-f3c21bf5a3a8?w=800&h=600&fit=crop',
+    tags: ['utensilios', 'salud', 'cocina'],
+    content: '',
+  },
+  {
+    id: '4',
+    title: '10 superalimentos que debes incluir en tu dieta',
+    description:
+      'Conoce los superalimentos más nutritivos y cómo incorporarlos fácilmente en tus comidas diarias.',
+    category: 'nutricion',
+    slug: 'superalimentos-dieta-saludable',
+    publishDate: new Date('2024-11-28'),
+    author: 'Dr. Luis Pérez',
+    image:
+      'https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=800&h=600&fit=crop',
+    tags: ['superalimentos', 'nutrición', 'dieta'],
+    content: '',
+  },
+];
+
+// Agrupar posts por categoría
+const categories = [...new Set(blogPosts.map((post) => post.category))];
+const postsByCategory = categories.reduce(
+  (acc, category) => {
+    acc[category] = blogPosts.filter((post) => post.category === category);
+    return acc;
+  },
+  {} as Record<string, BlogPost[]>
+);
+---
+
+<BaseLayout
+  title='Blog - Consejos para una vida saludable'
+  description='Descubre consejos, guías y recomendaciones sobre cocina saludable, nutrición y bienestar. Artículos escritos por expertos para transformar tu estilo de vida.'
+>
+  <div class='bg-primary-50 py-12'>
+    <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='text-center'>
+        <h1 class='title-main text-gray-900 mb-4'>Blog de vida saludable</h1>
+        <p class='lead-text text-gray-600 max-w-2xl mx-auto'>
+          Consejos, guías y recomendaciones para llevar un estilo de vida más
+          saludable y consciente
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
+    <!-- Categorías -->
+    <div class='mb-8'>
+      <h2 class='text-2xl font-bold text-gray-900 mb-4'>Categorías</h2>
+      <div class='flex flex-wrap gap-2'>
+        <a
+          href='/blog/'
+          class='bg-primary-100 hover:bg-primary-200 text-primary-800 px-4 py-2 rounded-full text-sm font-medium transition-colors'
+        >
+          Todos los artículos
+        </a>
+        <a
+          href='/blog/cocina/'
+          class='bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-full text-sm font-medium transition-colors'
+        >
+          Cocina saludable
+        </a>
+        <a
+          href='/blog/nutricion/'
+          class='bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-full text-sm font-medium transition-colors'
+        >
+          Nutrición
+        </a>
+      </div>
+    </div>
+
+    <!-- Artículo destacado -->
+    {
+      blogPosts.find((post) => post.featured) && (
+        <section class='mb-12'>
+          <h2 class='text-2xl font-bold text-gray-900 mb-6'>
+            Artículo destacado
+          </h2>
+          <div class='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+            <BlogCard
+              post={blogPosts.find((post) => post.featured)!}
+              featured={true}
+            />
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Todos los artículos -->
+    <section>
+      <h2 class='text-2xl font-bold text-gray-900 mb-6'>Todos los artículos</h2>
+      <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+        {blogPosts.map((post) => <BlogCard post={post} />)}
+      </div>
+    </section>
+
+    <!-- Paginación (placeholder) -->
+    <div class='mt-12 flex justify-center'>
+      <nav class='flex space-x-2'>
+        <span class='bg-primary-600 text-white px-4 py-2 rounded-lg'>1</span>
+        <a
+          href='/blog/page/2/'
+          class='bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-lg transition-colors'
+          >2</a
+        >
+        <a
+          href='/blog/page/3/'
+          class='bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-lg transition-colors'
+          >3</a
+        >
+      </nav>
+    </div>
+  </div>
+</BaseLayout>
