@@ -1,6 +1,6 @@
 ---
 import type { SiteConfig } from '../types';
-import '../styles/typography.css';
+import '../styles/base.css';
 
 export interface Props {
   title?: string;
@@ -79,7 +79,7 @@ const pageTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
   </head>
   <body class="bg-white text-gray-900 font-sans">
     <header class="bg-white shadow-sm sticky top-0 z-50">
@@ -119,7 +119,7 @@ const pageTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
       <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div class="col-span-1 md:col-span-2">
-            <h3 class="text-2xl font-bold text-primary-600 mb-4 font-serif">LDTx</h3>
+            <h3 class="text-2xl font-bold  mb-4 font-serif">LDTx</h3>
             <p class="text-gray-600 mb-4">
               Tu guía para una vida más saludable. Descubre productos y consejos que transformarán tu bienestar.
             </p>

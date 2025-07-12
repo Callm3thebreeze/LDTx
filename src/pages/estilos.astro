@@ -1,0 +1,334 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title='Guía de Estilos Base - LDTx'
+  description='Demostración de todos los estilos base disponibles en el sistema'
+>
+  <div class='container section-padding'>
+    <h1 class='hero-title text-balance'>Guía de Estilos Base</h1>
+    <p class='hero-subtitle'>
+      Demostración de todos los componentes y estilos disponibles en el sistema
+    </p>
+
+    <!-- Títulos -->
+    <section class='mb-12'>
+      <h2 class='section-title'>Títulos y Tipografía</h2>
+      <div class='space-y-4'>
+        <h1>Título H1 - Playfair Display Bold</h1>
+        <h2>Título H2 - Inter Bold</h2>
+        <h3>Título H3 - Inter Semibold</h3>
+        <h4>Título H4 - Inter Medium</h4>
+        <h5>Título H5 - Inter Medium</h5>
+        <h6>Título H6 - Inter Medium</h6>
+
+        <div class='border-t pt-4'>
+          <p class='lead-text'>
+            Este es un párrafo con texto destacado (lead-text)
+          </p>
+          <p>Este es un párrafo normal con texto del cuerpo</p>
+          <p class='small-text'>
+            Este es texto pequeño para información secundaria
+          </p>
+          <p class='meta-text'>
+            Este es texto de metadatos como fechas y autores
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Botones -->
+    <section class='mb-12'>
+      <h2 class='section-title'>Botones</h2>
+      <div class='space-y-4'>
+        <div class='flex flex-wrap gap-4'>
+          <button class='btn-primary'>Primario</button>
+          <button class='btn-secondary'>Secundario</button>
+          <button class='btn-accent'>Acento</button>
+          <button class='btn-highlight'>Destacado</button>
+        </div>
+
+        <div class='flex flex-wrap gap-4'>
+          <button class='btn-outline-primary'>Borde Primario</button>
+          <button class='btn-outline-secondary'>Borde Secundario</button>
+          <button class='btn-ghost'>Fantasma</button>
+        </div>
+
+        <div class='flex flex-wrap gap-4 items-center'>
+          <button class='btn-primary btn-small'>Pequeño</button>
+          <button class='btn-primary'>Normal</button>
+          <button class='btn-primary btn-large'>Grande</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards -->
+    <section class='mb-12'>
+      <h2 class='section-title'>Cards</h2>
+      <div class='grid md:grid-cols-2 gap-6'>
+        <div class='card'>
+          <div class='card-header'>
+            <h3 class='card-title'>Card con Header</h3>
+          </div>
+          <div class='card-body'>
+            <p class='card-description'>
+              Esta es una card con header, body y footer para mostrar contenido
+              estructurado.
+            </p>
+          </div>
+          <div class='card-footer'>
+            <button class='btn-primary'>Acción</button>
+          </div>
+        </div>
+
+        <div class='card'>
+          <div class='card-body'>
+            <h3 class='card-title'>Card Simple</h3>
+            <p class='card-description'>
+              Esta es una card simple solo con body para contenido más directo.
+            </p>
+            <div class='mt-4'>
+              <button class='btn-secondary'>Ver más</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Badges -->
+    <section class='mb-12'>
+      <h2 class='section-title'>Badges y Tags</h2>
+      <div class='flex flex-wrap gap-2'>
+        <span class='badge-primary'>Primario</span>
+        <span class='badge-secondary'>Secundario</span>
+        <span class='badge-accent'>Acento</span>
+        <span class='badge-highlight'>Destacado</span>
+        <span class='badge-gray'>Neutral</span>
+      </div>
+    </section>
+
+    <!-- Alertas -->
+    <section class='mb-12'>
+      <h2 class='section-title'>Alertas</h2>
+      <div class='space-y-4'>
+        <div class='alert-info'>
+          <strong>Información:</strong> Este es un mensaje informativo usando alert-info.
+        </div>
+        <div class='alert-success'>
+          <strong>Éxito:</strong> Operación completada correctamente usando alert-success.
+        </div>
+        <div class='alert-warning'>
+          <strong>Advertencia:</strong> Ten cuidado con esta acción usando alert-warning.
+        </div>
+        <div class='alert-error'>
+          <strong>Error:</strong> Algo salió mal, revisa los datos usando alert-error.
+        </div>
+      </div>
+    </section>
+
+    <!-- Navegación -->
+    <section class='mb-12'>
+      <h2 class='section-title'>Navegación</h2>
+      <nav class='mb-6'>
+        <div class='flex space-x-1'>
+          <a href='#' class='nav-link nav-link-active'>Página Actual</a>
+          <a href='#' class='nav-link'>Otra Página</a>
+          <a href='#' class='nav-link'>Más Páginas</a>
+        </div>
+      </nav>
+
+      <nav class='breadcrumb'>
+        <a href='/' class='breadcrumb-item'>Inicio</a>
+        <span class='breadcrumb-separator'>/</span>
+        <a href='/guias' class='breadcrumb-item'>Guías</a>
+        <span class='breadcrumb-separator'>/</span>
+        <span class='breadcrumb-item'>Estilos Base</span>
+      </nav>
+    </section>
+
+    <!-- Elementos HTML -->
+    <section class='mb-12'>
+      <h2 class='section-title'>Elementos HTML Base</h2>
+
+      <h3>Enlaces y Texto</h3>
+      <p>
+        Este párrafo contiene <a href='#'>un enlace normal</a> que cambia de color
+        al hacer hover. También puedes usar <code>código inline</code> para mostrar
+        fragmentos de código.
+      </p>
+
+      <h3>Listas</h3>
+      <div class='grid md:grid-cols-2 gap-6'>
+        <div>
+          <h4>Lista con viñetas</h4>
+          <ul>
+            <li>Primer elemento</li>
+            <li>Segundo elemento</li>
+            <li>Tercer elemento con más texto para ver cómo se comporta</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Lista numerada</h4>
+          <ol>
+            <li>Primer paso</li>
+            <li>Segundo paso</li>
+            <li>Tercer paso importante</li>
+          </ol>
+        </div>
+      </div>
+
+      <h3>Cita</h3>
+      <blockquote>
+        Esta es una cita destacada que usa el estilo blockquote con borde
+        izquierdo y fondo suave para resaltar contenido importante.
+      </blockquote>
+
+      <h3>Tabla</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sartén Cerámica</td>
+            <td>59.99€</td>
+            <td>En stock</td>
+          </tr>
+          <tr>
+            <td>Batidora Sin BPA</td>
+            <td>149.99€</td>
+            <td>Agotado</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Formularios -->
+    <section class='mb-12'>
+      <h2 class='section-title'>Formularios</h2>
+      <div class='max-w-md'>
+        <form class='space-y-4'>
+          <div>
+            <label for='nombre'>Nombre completo</label>
+            <input type='text' id='nombre' placeholder='Tu nombre' />
+          </div>
+          <div>
+            <label for='email'>Email</label>
+            <input type='email' id='email' placeholder='tu@email.com' />
+          </div>
+          <div>
+            <label for='mensaje'>Mensaje</label>
+            <textarea
+              id='mensaje'
+              rows='4'
+              placeholder='Escribe tu mensaje aquí...'></textarea>
+          </div>
+          <div>
+            <label for='categoria'>Categoría</label>
+            <select id='categoria'>
+              <option>Selecciona una opción</option>
+              <option>Consulta general</option>
+              <option>Soporte técnico</option>
+              <option>Colaboración</option>
+            </select>
+          </div>
+          <button type='submit' class='btn-primary'>Enviar mensaje</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Contenedores -->
+    <section class='mb-12'>
+      <h2 class='section-title'>Contenedores y Espaciado</h2>
+      <div class='space-y-6'>
+        <div class='bg-gray-100 p-4 rounded'>
+          <p class='meta-text mb-2'>Container estándar (max-w-7xl)</p>
+          <div class='container bg-primary-50 p-4 rounded'>
+            Contenido dentro del container estándar
+          </div>
+        </div>
+
+        <div class='bg-gray-100 p-4 rounded'>
+          <p class='meta-text mb-2'>Container pequeño (max-w-3xl)</p>
+          <div class='container-sm bg-secondary-50 p-4 rounded'>
+            Contenido dentro del container pequeño
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ejemplo completo -->
+    <section class='section-padding bg-accent-50 rounded-lg'>
+      <h2 class='section-title'>Ejemplo de Producto Completo</h2>
+      <div class='grid lg:grid-cols-2 gap-8'>
+        <div>
+          <nav class='breadcrumb'>
+            <a href='/' class='breadcrumb-item'>Inicio</a>
+            <span class='breadcrumb-separator'>/</span>
+            <a href='/productos' class='breadcrumb-item'>Productos</a>
+            <span class='breadcrumb-separator'>/</span>
+            <span class='breadcrumb-item'>Cocina</span>
+          </nav>
+
+          <h1 class='title-main'>Sartén Cerámica Premium</h1>
+          <p class='meta-text'>
+            <span class='badge-accent'>En Stock</span>
+            <span class='mx-2'>•</span>
+            <span>⭐ 4.8 (124 reseñas)</span>
+          </p>
+
+          <p class='lead-text'>
+            Sartén antiadherente de cerámica libre de PFOA y PTFE. Perfecta para
+            una cocina saludable y respetuosa con el medio ambiente.
+          </p>
+
+          <h3>Características principales</h3>
+          <ul>
+            <li>100% libre de químicos tóxicos</li>
+            <li>Distribución uniforme del calor</li>
+            <li>Fácil limpieza y mantenimiento</li>
+            <li>Apta para todo tipo de cocinas</li>
+          </ul>
+
+          <div class='alert-info'>
+            <strong>Envío gratis</strong> en pedidos superiores a 50€
+          </div>
+        </div>
+
+        <div class='card'>
+          <div class='card-body'>
+            <div class='flex items-center justify-between mb-4'>
+              <div class='flex items-center space-x-2'>
+                <span class='text-3xl font-bold text-primary-600'>59.99€</span>
+                <span class='text-lg text-gray-400 line-through'>79.99€</span>
+              </div>
+              <span class='badge-highlight'>-25%</span>
+            </div>
+
+            <div class='space-y-3'>
+              <button class='btn-primary btn-large w-full'>Comprar Ahora</button
+              >
+              <button class='btn-outline-primary btn-large w-full'
+                >Añadir al Carrito</button
+              >
+              <button class='btn-ghost w-full'>❤️ Añadir a Favoritos</button>
+            </div>
+
+            <hr />
+
+            <div class='space-y-2'>
+              <p class='small-text'>✅ Garantía de 2 años</p>
+              <p class='small-text'>🚚 Envío en 24-48h</p>
+              <p class='small-text'>🔄 Devolución gratuita 30 días</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

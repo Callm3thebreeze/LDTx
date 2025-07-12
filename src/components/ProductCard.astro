@@ -20,7 +20,7 @@ const { product, featured = false } = Astro.props;
     />
     {
       product.originalPrice && (
-        <div class='absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-medium'>
+        <div class='absolute top-2 left-2 bg-highlight-500 text-white px-2 py-1 rounded-full text-xs font-medium'>
           -
           {Math.round(
             ((product.originalPrice - product.price) / product.originalPrice) *
@@ -32,7 +32,7 @@ const { product, featured = false } = Astro.props;
     }
     {
       product.featured && (
-        <div class='absolute top-2 right-2 bg-primary-500 text-white px-2 py-1 rounded-full text-xs font-medium'>
+        <div class='absolute top-2 right-2 bg-secondary-500 text-white px-2 py-1 rounded-full text-xs font-medium'>
           Destacado
         </div>
       )
@@ -91,8 +91,8 @@ const { product, featured = false } = Astro.props;
       <span
         class={`text-xs px-2 py-1 rounded-full ${
           product.inStock
-            ? 'bg-green-100 text-green-800'
-            : 'bg-red-100 text-red-800'
+            ? 'bg-accent-100 text-accent-800'
+            : 'bg-highlight-100 text-highlight-800'
         }`}
       >
         {product.inStock ? 'En stock' : 'Agotado'}
