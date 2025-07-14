@@ -10,7 +10,7 @@ const { product, featured = false } = Astro.props;
 ---
 
 <article
-  class={`bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow ${featured ? 'md:col-span-2' : ''}`}
+  class={`card hover:shadow-lg transition-shadow ${featured ? 'md:col-span-2' : ''}`}
 >
   <div class='aspect-square overflow-hidden relative'>
     <img
@@ -20,7 +20,7 @@ const { product, featured = false } = Astro.props;
     />
     {
       product.originalPrice && (
-        <div class='absolute top-2 left-2 bg-highlight-500 text-white px-2 py-1 rounded-full text-xs font-medium'>
+        <div class='absolute top-2 left-2 badge-highlight'>
           -
           {Math.round(
             ((product.originalPrice - product.price) / product.originalPrice) *
@@ -32,18 +32,14 @@ const { product, featured = false } = Astro.props;
     }
     {
       product.featured && (
-        <div class='absolute top-2 right-2 bg-secondary-500 text-white px-2 py-1 rounded-full text-xs font-medium'>
-          Destacado
-        </div>
+        <div class='absolute top-2 right-2 badge-secondary'>Destacado</div>
       )
     }
   </div>
 
-  <div class='p-4'>
+  <div class='card-body'>
     <div class='meta-text mb-2'>
-      <span
-        class='bg-primary-100 text-primary-800 px-2 py-1 rounded-full text-xs font-medium'
-      >
+      <span class='badge-primary'>
         {product.category}
       </span>
       {
@@ -62,9 +58,7 @@ const { product, featured = false } = Astro.props;
       }
     </div>
 
-    <h3
-      class='card-title text-gray-900 mb-2 hover:text-primary-600 transition-colors'
-    >
+    <h3 class='card-title hover:text-primary-600 transition-colors'>
       <a href={`/producto/${product.slug}/`}>
         {product.name}
       </a>
@@ -102,7 +96,7 @@ const { product, featured = false } = Astro.props;
     <div class='flex space-x-2'>
       <a
         href={`/producto/${product.slug}/`}
-        class='flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded text-center text-sm transition-colors'
+        class='flex-1 btn-ghost text-center text-sm'
       >
         Ver detalles
       </a>
@@ -110,7 +104,7 @@ const { product, featured = false } = Astro.props;
         href={product.affiliateLink}
         target='_blank'
         rel='nofollow noopener'
-        class='flex-1 bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded text-center text-sm transition-colors'
+        class='flex-1 btn-secondary text-center text-sm'
       >
         Comprar
       </a>

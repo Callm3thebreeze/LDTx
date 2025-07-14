@@ -94,30 +94,17 @@ const featuredProducts: Product[] = [
   description='Descubre productos saludables y consejos para transformar tu bienestar. Blog especializado en cocina saludable y productos afiliados cuidadosamente seleccionados.'
 >
   <!-- Hero Section -->
-  <section
-    class='bg-gradient-to-br from-primary-50 to-primary-100 py-16 lg:py-24'
-  >
+  <section class='bg-accent-100 py-16 lg:py-24'>
     <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
       <div class='text-center'>
-        <h1 class='hero-title text-gray-900 mb-6'>
-          Tu guía para una
-          <span class='text-primary-600'>vida saludable</span>
-        </h1>
-        <p class='lead-text text-gray-600 mb-8 max-w-3xl mx-auto'>
+        <h1 class='hero-title'>Libre de tóxicos</h1>
+        <p class='lead-text mb-8 max-w-3xl mx-auto'>
           Descubre productos cuidadosamente seleccionados y consejos expertos
           para transformar tu bienestar y el de tu familia.
         </p>
         <div class='flex flex-col sm:flex-row gap-4 justify-center'>
-          <a
-            href='/blog/'
-            class='bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors'
-          >
-            Explorar Blog
-          </a>
-          <a
-            href='/productos/'
-            class='bg-white hover:bg-gray-50 text-primary-600 font-semibold py-3 px-8 rounded-lg border-2 border-primary-600 transition-colors'
-          >
+          <a href='/blog/' class='btn-primary btn-large'> Explorar Blog </a>
+          <a href='/productos/' class='btn-outline-secondary btn-large'>
             Ver Productos
           </a>
         </div>
@@ -142,22 +129,15 @@ const featuredProducts: Product[] = [
         {featuredPosts.map((post) => <BlogCard post={post} />)}
 
         <!-- Teaser card para más artículos -->
-        <div
-          class='bg-secondary-50 rounded-lg p-6 flex flex-col justify-center items-center text-center'
-        >
-          <h3 class='text-xl font-semibold text-gray-900 mb-2'>
-            Y muchos más artículos
-          </h3>
-          <p class='text-gray-600 mb-4'>
-            Descubre todos nuestros consejos sobre cocina saludable, nutrición y
-            bienestar
-          </p>
-          <a
-            href='/blog/'
-            class='bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-6 rounded-lg transition-colors'
-          >
-            Ver todos los artículos
-          </a>
+        <div class='card'>
+          <div class='card-body text-center'>
+            <h3 class='card-title'>Y muchos más artículos</h3>
+            <p class='card-description'>
+              Descubre todos nuestros consejos sobre cocina saludable, nutrición
+              y bienestar
+            </p>
+            <a href='/blog/' class='btn-primary'> Ver todos los artículos </a>
+          </div>
         </div>
       </div>
     </div>
@@ -178,22 +158,17 @@ const featuredProducts: Product[] = [
         {featuredProducts.map((product) => <ProductCard product={product} />)}
 
         <!-- Teaser card para más productos -->
-        <div
-          class='bg-white rounded-lg p-6 flex flex-col justify-center items-center text-center shadow-md'
-        >
-          <h3 class='text-xl font-semibold text-gray-900 mb-2'>
-            Catálogo completo
-          </h3>
-          <p class='text-gray-600 mb-4'>
-            Explora nuestra selección completa de productos para una vida
-            saludable
-          </p>
-          <a
-            href='/productos/'
-            class='bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-6 rounded-lg transition-colors'
-          >
-            Ver todos los productos
-          </a>
+        <div class='card'>
+          <div class='card-body text-center'>
+            <h3 class='card-title'>Catálogo completo</h3>
+            <p class='card-description'>
+              Explora nuestra selección completa de productos para una vida
+              saludable
+            </p>
+            <a href='/productos/' class='btn-primary'>
+              Ver todos los productos
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -209,10 +184,7 @@ const featuredProducts: Product[] = [
         Únete a nuestra comunidad y recibe consejos semanales sobre vida
         saludable
       </p>
-      <a
-        href='/contacto/'
-        class='bg-white hover:bg-gray-100 text-primary-600 font-semibold py-3 px-8 rounded-lg transition-colors inline-block'
-      >
+      <a href='/contacto/' class='btn-outline-secondary btn-large'>
         Contáctanos
       </a>
     </div>

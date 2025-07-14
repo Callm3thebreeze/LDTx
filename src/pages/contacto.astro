@@ -117,10 +117,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </label>
           </div>
 
-          <button
-            type='submit'
-            class='w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors'
-          >
+          <button type='submit' class='w-full btn-secondary btn-large'>
             Enviar mensaje
           </button>
         </form>
@@ -133,36 +130,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </h2>
 
         <div class='space-y-6'>
-          <div class='bg-gray-50 rounded-lg p-6'>
-            <h3 class='text-lg font-semibold text-gray-900 mb-3'>
-              📧 Correo electrónico
-            </h3>
-            <p class='text-gray-600 mb-2'>Para consultas generales:</p>
-            <a
-              href='mailto:contacto@ldtx.com'
-              class='text-primary-600 hover:text-primary-700 font-medium'
-            >
-              contacto@ldtx.com
-            </a>
+          <div class='card'>
+            <div class='card-body'>
+              <h3 class='card-title'>📧 Correo electrónico</h3>
+              <p class='text-gray-600 mb-2'>Para consultas generales:</p>
+              <a
+                href='mailto:contacto@ldtx.com'
+                class='text-primary-600 hover:text-primary-700 font-medium'
+              >
+                contacto@ldtx.com
+              </a>
 
-            <p class='text-gray-600 mt-4 mb-2'>Para colaboraciones:</p>
-            <a
-              href='mailto:colaboraciones@ldtx.com'
-              class='text-primary-600 hover:text-primary-700 font-medium'
-            >
-              colaboraciones@ldtx.com
-            </a>
+              <p class='text-gray-600 mt-4 mb-2'>Para colaboraciones:</p>
+              <a
+                href='mailto:colaboraciones@ldtx.com'
+                class='text-primary-600 hover:text-primary-700 font-medium'
+              >
+                colaboraciones@ldtx.com
+              </a>
+            </div>
           </div>
 
-          <div class='bg-gray-50 rounded-lg p-6'>
-            <h3 class='text-lg font-semibold text-gray-900 mb-3'>
-              ⏰ Tiempo de respuesta
-            </h3>
-            <p class='text-gray-600'>
-              Normalmente respondemos en un plazo de 24-48 horas durante días
-              laborables. Para consultas urgentes, por favor indícalo en el
-              asunto del mensaje.
-            </p>
+          <div class='card'>
+            <div class='card-body'>
+              <h3 class='card-title'>⏰ Tiempo de respuesta</h3>
+              <p class='card-description'>
+                Normalmente respondemos en un plazo de 24-48 horas durante días
+                laborables. Para consultas urgentes, por favor indícalo en el
+                asunto del mensaje.
+              </p>
+            </div>
           </div>
 
           <div class='bg-gray-50 rounded-lg p-6'>

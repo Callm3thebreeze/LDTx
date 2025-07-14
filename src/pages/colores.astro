@@ -39,17 +39,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <!-- Ejemplos de uso -->
       <div class='space-y-4'>
-        <button
-          class='bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors'
-        >
-          Botón Principal
-        </button>
+        <button class='btn-secondary'> Botón Principal </button>
         <div class='bg-primary-50 p-4 rounded-lg'>
-          <span
-            class='bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm font-medium'
-          >
-            Tag Primary
-          </span>
+          <span class='badge-primary'> Tag Primary </span>
         </div>
       </div>
     </section>
@@ -92,11 +84,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             Ideal para backgrounds de secciones y elementos informativos.
           </p>
         </div>
-        <button
-          class='bg-secondary-500 hover:bg-secondary-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors'
-        >
-          Botón Secondary
-        </button>
+        <button class='btn-primary'> Botón Secondary </button>
       </div>
     </section>
 
@@ -130,17 +118,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <!-- Ejemplos de uso -->
       <div class='space-y-4'>
-        <button
-          class='bg-highlight-500 hover:bg-highlight-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors'
-        >
-          ¡Comprar Ahora!
-        </button>
-        <div class='bg-highlight-50 border border-highlight-200 p-4 rounded-lg'>
-          <span
-            class='bg-highlight-100 text-highlight-800 px-3 py-1 rounded-full text-sm font-medium'
-          >
-            Oferta Especial -25%
-          </span>
+        <button class='btn-highlight'> ¡Comprar Ahora! </button>
+        <div class='alert-error'>
+          <span class='badge-highlight'> Oferta Especial -25% </span>
         </div>
       </div>
     </section>
@@ -176,22 +156,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Ejemplos de uso -->
       <div class='space-y-4'>
         <div class='bg-accent-50 border border-accent-200 p-4 rounded-lg'>
-          <span
-            class='bg-accent-100 text-accent-800 px-3 py-1 rounded-full text-sm font-medium'
-          >
-            ✅ En Stock
-          </span>
-          <span
-            class='bg-accent-100 text-accent-800 px-3 py-1 rounded-full text-sm font-medium ml-2'
-          >
-            🌱 Eco-Friendly
-          </span>
+          <span <span class='badge-accent'> ✅ En Stock </span>
+          <span class='badge-accent ml-2'> 🌱 Eco-Friendly </span>
         </div>
-        <button
-          class='bg-accent-600 hover:bg-accent-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors'
-        >
-          Producto Natural
-        </button>
+        <button class='btn-accent'> Producto Natural </button>
       </div>
     </section>
 
@@ -211,16 +179,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
           <div class='p-4'>
             <div class='flex items-center justify-between mb-2'>
-              <span
-                class='bg-primary-100 text-primary-800 px-2 py-1 rounded-full text-xs font-medium'
-              >
-                Cocina
-              </span>
-              <span
-                class='bg-highlight-100 text-highlight-800 px-2 py-1 rounded-full text-xs font-medium'
-              >
-                -20%
-              </span>
+              <span <span class='badge-primary'> Cocina </span>
+              <span class='badge-highlight'> -20% </span>
             </div>
             <h3 class='font-semibold text-gray-900 mb-2'>
               Sartén Cerámica Premium
@@ -230,11 +190,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <span class='text-lg font-bold text-primary-600'>59.99€</span>
                 <span class='text-sm text-gray-400 line-through'>79.99€</span>
               </div>
-              <span
-                class='bg-accent-100 text-accent-800 px-2 py-1 rounded-full text-xs font-medium'
-              >
-                En stock
-              </span>
+              <span class='badge-accent'> En stock </span>
             </div>
             <button
               class='w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded transition-colors'

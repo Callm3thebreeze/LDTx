@@ -10,7 +10,7 @@ const { post, featured = false } = Astro.props;
 ---
 
 <article
-  class={`bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow ${featured ? 'md:col-span-2' : ''}`}
+  class={`card hover:shadow-lg transition-shadow ${featured ? 'md:col-span-2' : ''}`}
 >
   {
     post.image && (
@@ -24,11 +24,9 @@ const { post, featured = false } = Astro.props;
     )
   }
 
-  <div class='p-6'>
+  <div class='card-body'>
     <div class='meta-text mb-2'>
-      <span
-        class='bg-primary-100 text-primary-800 px-2 py-1 rounded-full text-xs font-medium'
-      >
+      <span class='badge-primary'>
         {post.category}
       </span>
       <span class='mx-2'>•</span>
@@ -43,9 +41,7 @@ const { post, featured = false } = Astro.props;
       </time>
     </div>
 
-    <h3
-      class='card-title text-gray-900 mb-2 hover:text-primary-600 transition-colors'
-    >
+    <h3 class='card-title hover:text-primary-600 transition-colors'>
       <a href={`/blog/${post.category}/${post.slug}/`}>
         {post.title}
       </a>
@@ -56,7 +52,7 @@ const { post, featured = false } = Astro.props;
     </p>
 
     <div class='flex items-center justify-between'>
-      <span class='small-text text-gray-500'>
+      <span class='small-text'>
         Por {post.author}
       </span>
 
