@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import { getBlogPosts } from '../../../utils/content';
+
+export async function getStaticPaths() {
+  // Obtener todos los posts de Strapi
+  const allPosts = await getBlogPosts();
+
+  // Obtener categorías únicas
+  const categories = [...new Set(allPosts.map((post) => post.category))];
+
+  // Generar rutas dinámicas para cada categoría
+  return categories.map((category) => ({
+    params: { category },
+    props: {
+      category,
+      posts: allPosts.filter((post) => post.category === category),
+    },
+  }));
+}
+
+// Obtener datos desde las props
+const { category, posts } = Astro.props;
+
+// Si no hay posts, redirigir a blog principal
+if (!posts || posts.length === 0) {
+  return Astro.redirect('/blog/');
+}
+
+// Obtener todos los posts para navegación
+const allPosts = await getBlogPosts();
+const allCategories = [...new Set(allPosts.map((post) => post.category))];
+---
+
+<BaseLayout
+  title={`${category.charAt(0).toUpperCase() + category.slice(1)} - Blog LDTx`}
+  description={`Descubre artículos sobre ${category}. Consejos y recomendaciones para una vida más saludable.`}
+>
+  <div class='bg-primary-50 py-12'>
+    <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='text-center'>
+        <nav class='mb-4'>
+          <ol class='flex items-center justify-center space-x-2 text-sm'>
+            <li>
+              <a href='/' class='text-primary-600 hover:text-primary-700'
+                >Inicio</a
+              >
+            </li>
+            <li class='text-gray-400'>/</li>
+            <li>
+              <a href='/blog/' class='text-primary-600 hover:text-primary-700'
+                >Blog</a
+              >
+            </li>
+            <li class='text-gray-400'>/</li>
+            <li class='text-gray-600 capitalize'>{category}</li>
+          </ol>
+        </nav>
+
+        <h1
+          class='text-4xl md:text-5xl font-bold text-gray-900 mb-4 capitalize'
+        >
+          {category}
+        </h1>
+        <p class='text-xl text-gray-600 max-w-2xl mx-auto'>
+          {posts.length}
+          {posts.length === 1 ? 'artículo' : 'artículos'} sobre {category}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
+    <!-- Navegación de categorías -->
+    <div class='mb-8'>
+      <h2 class='text-2xl font-bold text-gray-900 mb-4'>Categorías del blog</h2>
+      <div class='flex flex-wrap gap-2'>
+        <a
+          href='/blog/'
+          class='bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-full text-sm font-medium transition-colors'
+        >
+          Todas las categorías
+        </a>
+        {
+          allCategories.map((cat) => (
+            <a
+              href={`/blog/${cat}/`}
+              class={`px-4 py-2 rounded-full text-sm font-medium transition-colors capitalize ${
+                cat === category
+                  ? 'bg-primary-100 text-primary-800'
+                  : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+              }`}
+            >
+              {cat}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Posts de la categoría -->
+    <section>
+      <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+        {posts.map((post) => <BlogCard post={post} />)}
+      </div>
+    </section>
+
+    <!-- Enlace para ver más -->
+    <div class='mt-12 text-center'>
+      <a
+        href='/blog/'
+        class='inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-primary-50 hover:bg-primary-100 transition-colors'
+      >
+        Ver todos los artículos
+      </a>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,213 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getBlogPosts } from '../../utils/content';
+
+export async function getStaticPaths() {
+  // Obtener todos los posts de Strapi
+  const allPosts = await getBlogPosts();
+
+  // Generar rutas dinámicas para cada post
+  return allPosts.map((post) => ({
+    params: {
+      slug: `${post.category}/${post.slug}`,
+    },
+    props: { post },
+  }));
+}
+
+// Obtener el post desde las props
+const { post } = Astro.props;
+
+// Si no encontramos el post, redirigir a 404
+if (!post) {
+  return Astro.redirect('/404');
+}
+
+// Obtener todos los posts para artículos relacionados
+const allPosts = await getBlogPosts();
+
+// Obtener posts relacionados de la misma categoría (excluyendo el actual)
+const relatedPosts = allPosts
+  .filter((p) => p.category === post.category && p.id !== post.id)
+  .slice(0, 2);
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  type='article'
+  image={post.image}
+>
+  <article class='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
+    <!-- Breadcrumb -->
+    <nav class='mb-8'>
+      <ol class='flex items-center space-x-2 text-sm text-gray-600'>
+        <li>
+          <a href='/' class='text-primary-600 hover:text-primary-700'>Inicio</a>
+        </li>
+        <li class='text-gray-400'>/</li>
+        <li>
+          <a href='/blog/' class='text-primary-600 hover:text-primary-700'
+            >Blog</a>
+        </li>
+        <li class='text-gray-400'>/</li>
+        <li>
+          <a
+            href={`/blog/${post.category}/`}
+            class='text-primary-600 hover:text-primary-700 capitalize'
+            >{post.category}</a>
+        </li>
+        <li class='text-gray-400'>/</li>
+        <li class='text-gray-600'>{post.title}</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class='mb-8'>
+      <div class='flex items-center text-sm text-gray-500 mb-4'>
+        <span
+          class='bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-xs font-medium capitalize'
+        >
+          {post.category}
+        </span>
+        <span class='mx-3'>•</span>
+        <time datetime={post.publishDate.toISOString()}>
+          {
+            post.publishDate.toLocaleDateString('es-ES', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })
+          }
+        </time>
+        {
+          post.readTime && (
+            <>
+              <span class='mx-3'>•</span>
+              <span>{post.readTime} de lectura</span>
+            </>
+          )
+        }
+      </div>
+
+      <h1 class='text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4'>
+        {post.title}
+      </h1>
+
+      <p class='text-xl text-gray-600 mb-6'>
+        {post.description}
+      </p>
+
+      {
+        post.author && (
+          <div class='flex items-center text-gray-600'>
+            <span>Por {post.author}</span>
+          </div>
+        )
+      }
+    </header>
+
+    <!-- Featured Image -->
+    {
+      post.image && (
+        <div class='mb-8'>
+          <img
+            src={post.image}
+            alt={post.title}
+            class='w-full h-64 md:h-96 object-cover rounded-lg'
+          />
+        </div>
+      )
+    }
+
+    <!-- Content -->
+    <div class='prose prose-lg prose-primary max-w-none'>
+      {
+        post.content ? (
+          <div set:html={post.content} />
+        ) : (
+          <p class='text-gray-500 italic'>Contenido no disponible</p>
+        )
+      }
+    </div>
+
+    <!-- Tags -->
+    {
+      post.tags && post.tags.length > 0 && (
+        <div class='mt-8 pt-8 border-t border-gray-200'>
+          <h3 class='text-lg font-semibold text-gray-900 mb-3'>Etiquetas</h3>
+          <div class='flex flex-wrap gap-2'>
+            {post.tags.map((tag) => (
+              <span class='bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm'>
+                #{tag.replace(' ', '-')}
+              </span>
+            ))}
+          </div>
+        </div>
+      )
+    }
+
+    <!-- Related articles -->
+    {
+      relatedPosts.length > 0 && (
+        <div class='mt-12 pt-8 border-t border-gray-200'>
+          <h3 class='text-2xl font-bold text-gray-900 mb-6'>
+            Artículos relacionados
+          </h3>
+          <div class='grid grid-cols-1 md:grid-cols-2 gap-6'>
+            {relatedPosts.map((relatedPost) => (
+              <a
+                href={`/blog/${relatedPost.category}/${relatedPost.slug}/`}
+                class='group'
+              >
+                <div class='bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow'>
+                  {relatedPost.image && (
+                    <img
+                      src={relatedPost.image}
+                      alt={relatedPost.title}
+                      class='w-full h-32 object-cover'
+                    />
+                  )}
+                  <div class='p-4'>
+                    <h4 class='font-semibold text-gray-900 group-hover:text-primary-600 transition-colors'>
+                      {relatedPost.title}
+                    </h4>
+                    <p class='text-gray-600 text-sm mt-1'>
+                      {relatedPost.description}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )
+    }
+  </article>
+
+  <!-- Schema.org structured data -->
+  <script
+    type='application/ld+json'
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: post.title,
+      description: post.description,
+      image: post.image,
+      author: {
+        '@type': 'Person',
+        name: post.author || 'LDTx',
+      },
+      datePublished: post.publishDate.toISOString(),
+      dateModified: post.publishDate.toISOString(),
+      publisher: {
+        '@type': 'Organization',
+        name: 'LDTx',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://tu-dominio.com/logo.png',
+        },
+      },
+    })}
+  />
+</BaseLayout>

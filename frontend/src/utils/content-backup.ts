@@ -21,37 +21,23 @@ async function fetchFromStrapi(endpoint: string) {
   }
 }
 
-// ========================================
-// FUNCIONES DE CONTENIDO DEL SITIO (Strapi)
-// ========================================
-
 // Cargar contenido del sitio desde Strapi
 export async function getSiteContent() {
   const data = await fetchFromStrapi('/site-contents?populate=*');
-
-  if (
-    !data ||
-    !data.data ||
-    !Array.isArray(data.data) ||
-    data.data.length === 0
-  ) {
+  
+  if (!data) {
     // Fallback: cargar desde JSON local
     const { default: content } = await import('../data/site-content.json');
     return content;
   }
-
+  
   // Transformar datos de Strapi al formato esperado
   const siteContent: any = {};
-
+  
   data.data.forEach((item: any) => {
-    // Validar que el item tiene la estructura esperada
-    if (!item || !item.section || !item.content) {
-      return;
-    }
-
-    const section = item.section;
-    const content = item.content;
-
+    const section = item.attributes.section;
+    const content = item.attributes.content;
+    
     if (section === 'hero') {
       siteContent.hero = content;
     } else if (section === 'blog') {
@@ -65,97 +51,39 @@ export async function getSiteContent() {
       siteContent.sections.cta = content;
     }
   });
-
-  // Si no se procesaron datos de Strapi, usar fallback JSON
-  if (!siteContent.hero && !siteContent.sections) {
-    const { default: content } = await import('../data/site-content.json');
-    return content;
-  }
-
+  
   return siteContent;
 }
-
-// ========================================
-// FUNCIONES DE BLOG POSTS (Strapi)
-// ========================================
 
 // Cargar posts del blog desde Strapi
 export async function getBlogPosts(): Promise<BlogPost[]> {
   const data = await fetchFromStrapi('/blog-posts?populate=*');
-
+  
   if (!data) {
     // Fallback: cargar desde JSON local
     const { default: posts } = await import('../data/blog-posts.json');
-    return posts.map((post) => ({
+    return posts.map(post => ({
       ...post,
-      publishDate: new Date(post.publishDate),
+      publishDate: new Date(post.publishDate)
     }));
   }
-
+  
   // Transformar datos de Strapi al formato esperado
   return data.data.map((item: any) => {
-    // Extraer la URL de la imagen si existe
-    let imageUrl = null;
-    if (item.image) {
-      if (typeof item.image === 'string') {
-        imageUrl = item.image;
-      } else if (item.image.url) {
-        imageUrl = `http://localhost:1337${item.image.url}`;
-      }
-    }
-
-    // Procesar el contenido de Strapi
-    let processedContent = '';
-    if (item.content) {
-      if (typeof item.content === 'string') {
-        processedContent = item.content;
-      } else if (Array.isArray(item.content)) {
-        // Si es un array de bloques de contenido (rich text), extraer el texto
-        processedContent = item.content
-          .map((block: any) => {
-            if (block.type === 'paragraph' && block.children) {
-              return `<p>${block.children.map((child: any) => child.text || '').join('')}</p>`;
-            } else if (block.type === 'heading' && block.children) {
-              const level = block.level || 2;
-              const text = block.children
-                .map((child: any) => child.text || '')
-                .join('');
-              return `<h${level}>${text}</h${level}>`;
-            } else if (block.type === 'list' && block.children) {
-              const listItems = block.children
-                .map((child: any) => {
-                  if (child.children) {
-                    return `<li>${child.children.map((grandchild: any) => grandchild.text || '').join('')}</li>`;
-                  }
-                  return '';
-                })
-                .join('');
-              return block.format === 'ordered'
-                ? `<ol>${listItems}</ol>`
-                : `<ul>${listItems}</ul>`;
-            }
-            return '';
-          })
-          .join('');
-      } else {
-        // Si es un objeto, intentar convertirlo a string
-        processedContent = JSON.stringify(item.content);
-      }
-    }
-
+    const attrs = item.attributes;
     return {
       id: item.id.toString(),
-      title: item.title,
-      description: item.description,
-      category: item.category,
-      slug: item.slug,
-      publishDate: new Date(item.publishDate),
-      author: item.author,
-      image: imageUrl,
-      tags: item.tags || [],
-      content: processedContent,
-      featured: item.featured || false,
-      readTime: item.readtime || item.readTime,
+      title: attrs.title,
+      description: attrs.description,
+      category: attrs.category,
+      slug: attrs.slug,
+      publishDate: new Date(attrs.publishDate),
+      author: attrs.author,
+      image: attrs.image,
+      tags: attrs.tags || [],
+      content: attrs.content || '',
+      featured: attrs.featured || false,
+      readTime: attrs.readTime
     };
   });
 }
@@ -163,23 +91,19 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 // Cargar posts destacados desde Strapi
 export async function getFeaturedBlogPosts(): Promise<BlogPost[]> {
   const posts = await getBlogPosts();
-  return posts.filter((post) => post.featured);
+  return posts.filter(post => post.featured);
 }
 
 // Cargar posts por categoría desde Strapi
-export async function getBlogPostsByCategory(
-  category: string
-): Promise<BlogPost[]> {
+export async function getBlogPostsByCategory(category: string): Promise<BlogPost[]> {
   const posts = await getBlogPosts();
-  return posts.filter((post) => post.category === category);
+  return posts.filter(post => post.category === category);
 }
 
 // Cargar un post por slug desde Strapi
-export async function getBlogPostBySlug(
-  slug: string
-): Promise<BlogPost | undefined> {
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
   const posts = await getBlogPosts();
-  return posts.find((post) => post.slug === slug);
+  return posts.find(post => post.slug === slug);
 }
 
 // ========================================
@@ -195,28 +119,23 @@ export async function getProducts(): Promise<Product[]> {
 // Cargar productos destacados
 export async function getFeaturedProducts(): Promise<Product[]> {
   const products = await getProducts();
-  return products.filter((product) => product.featured);
+  return products.filter(product => product.featured);
 }
 
 // Cargar productos por categoría
-export async function getProductsByCategory(
-  category: string
-): Promise<Product[]> {
+export async function getProductsByCategory(category: string): Promise<Product[]> {
   const products = await getProducts();
-  return products.filter((product) => product.category === category);
+  return products.filter(product => product.category === category);
 }
 
 // Cargar un producto por slug
-export async function getProductBySlug(
-  slug: string
-): Promise<Product | undefined> {
+export async function getProductBySlug(slug: string): Promise<Product | undefined> {
+  const products = await getProducts();
+  return products.find(product => product.slug === slug);
+}
   const products = await getProducts();
   return products.find((product) => product.slug === slug);
 }
-
-// ========================================
-// FUNCIONES DE CATEGORÍAS Y PÁGINAS (siguen usando JSON)
-// ========================================
 
 // Cargar categorías
 export async function getCategories(): Promise<Category[]> {

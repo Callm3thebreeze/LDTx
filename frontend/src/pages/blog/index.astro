@@ -1,13 +1,21 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogCard from '../../components/BlogCard.astro';
-import { getFeaturedBlogPosts } from '../../utils/content';
+import { getBlogPosts } from '../../utils/content';
 
-// Load centralized data
-const blogPosts = await getFeaturedBlogPosts();
+// Cargar posts desde Strapi
+const blogPosts = await getBlogPosts();
 
-// Agrupar posts por categoría
-const categories = [...new Set(blogPosts.map((post) => post.category))];
+// Solo mostrar posts que existen en la base de datos
+if (!blogPosts || blogPosts.length === 0) {
+  console.log('No hay posts disponibles en la base de datos');
+}
+
+// Agrupar posts por categoría (solo si hay posts)
+const categories = blogPosts.length > 0 
+  ? [...new Set(blogPosts.map((post) => post.category))]
+  : [];
+
 const postsByCategory = categories.reduce(
   (acc, category) => {
     acc[category] = blogPosts.filter((post) => post.category === category);
@@ -15,6 +23,9 @@ const postsByCategory = categories.reduce(
   },
   {} as Record<string, any[]>
 );
+
+// Posts destacados (featured)
+const featuredPosts = blogPosts.filter(post => post.featured);
 ---
 
 <BaseLayout
@@ -34,55 +45,69 @@ const postsByCategory = categories.reduce(
   </div>
 
   <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
-    <!-- Categorías -->
-    <div class='mb-8'>
-      <h2 class='text-2xl font-bold text-gray-900 mb-4'>Categorías</h2>
-      <div class='flex flex-wrap gap-2'>
-        <a
-          href='/blog/'
-          class='bg-primary-100 hover:bg-primary-200 text-primary-800 px-4 py-2 rounded-full text-sm font-medium transition-colors'
-        >
-          Todos los artículos
-        </a>
-        <a
-          href='/blog/cocina/'
-          class='bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-full text-sm font-medium transition-colors'
-        >
-          Cocina saludable
-        </a>
-        <a
-          href='/blog/nutricion/'
-          class='bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-full text-sm font-medium transition-colors'
-        >
-          Nutrición
+    {blogPosts.length === 0 ? (
+      <!-- Mensaje cuando no hay posts -->
+      <div class="text-center py-16">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">No hay artículos disponibles</h2>
+        <p class="text-gray-600 mb-8">
+          Aún no se han publicado artículos en el blog. ¡Vuelve pronto para ver contenido nuevo!
+        </p>
+        <a href="/" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg transition-colors">
+          Volver al inicio
         </a>
       </div>
-    </div>
+    ) : (
+      <>
+        <!-- Categorías dinámicas -->
+        {categories.length > 0 && (
+          <div class='mb-8'>
+            <h2 class='text-2xl font-bold text-gray-900 mb-4'>Categorías</h2>
+            <div class='flex flex-wrap gap-2'>
+              <a
+                href='/blog/'
+                class='bg-primary-100 hover:bg-primary-200 text-primary-800 px-4 py-2 rounded-full text-sm font-medium transition-colors'
+              >
+                Todos los artículos ({blogPosts.length})
+              </a>
+              {categories.map((category) => (
+                <a
+                  href={`/blog/${category}/`}
+                  class='bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-full text-sm font-medium transition-colors capitalize'
+                >
+                  {category} ({postsByCategory[category].length})
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
 
-    <!-- Artículo destacado -->
-    {
-      blogPosts.find((post) => post.featured) && (
-        <section class='mb-12'>
+        <!-- Artículo destacado -->
+        {featuredPosts.length > 0 && (
+          <section class='mb-12'>
+            <h2 class='text-2xl font-bold text-gray-900 mb-6'>
+              Artículo destacado
+            </h2>
+            <div class='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+              <BlogCard
+                post={featuredPosts[0]}
+                featured={true}
+              />
+            </div>
+          </section>
+        )}
+
+        <!-- Todos los artículos -->
+        <section>
           <h2 class='text-2xl font-bold text-gray-900 mb-6'>
-            Artículo destacado
+            Todos los artículos ({blogPosts.length})
           </h2>
-          <div class='grid grid-cols-1 lg:grid-cols-2 gap-8'>
-            <BlogCard
-              post={blogPosts.find((post) => post.featured)!}
-              featured={true}
-            />
+          <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+            {blogPosts.map((post) => <BlogCard post={post} />)}
           </div>
         </section>
-      )
-    }
-
-    <!-- Todos los artículos -->
-    <section>
-      <h2 class='text-2xl font-bold text-gray-900 mb-6'>Todos los artículos</h2>
-      <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-        {blogPosts.map((post) => <BlogCard post={post} />)}
-      </div>
-    </section>
+      </>
+    )}
+  </div>
 
     <!-- Paginación (placeholder) -->
     <div class='mt-12 flex justify-center'>

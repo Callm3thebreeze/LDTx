@@ -29,12 +29,7 @@ async function fetchFromStrapi(endpoint: string) {
 export async function getSiteContent() {
   const data = await fetchFromStrapi('/site-contents?populate=*');
 
-  if (
-    !data ||
-    !data.data ||
-    !Array.isArray(data.data) ||
-    data.data.length === 0
-  ) {
+  if (!data) {
     // Fallback: cargar desde JSON local
     const { default: content } = await import('../data/site-content.json');
     return content;
@@ -44,13 +39,8 @@ export async function getSiteContent() {
   const siteContent: any = {};
 
   data.data.forEach((item: any) => {
-    // Validar que el item tiene la estructura esperada
-    if (!item || !item.section || !item.content) {
-      return;
-    }
-
-    const section = item.section;
-    const content = item.content;
+    const section = item.attributes.section;
+    const content = item.attributes.content;
 
     if (section === 'hero') {
       siteContent.hero = content;
@@ -65,12 +55,6 @@ export async function getSiteContent() {
       siteContent.sections.cta = content;
     }
   });
-
-  // Si no se procesaron datos de Strapi, usar fallback JSON
-  if (!siteContent.hero && !siteContent.sections) {
-    const { default: content } = await import('../data/site-content.json');
-    return content;
-  }
 
   return siteContent;
 }
@@ -94,68 +78,20 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 
   // Transformar datos de Strapi al formato esperado
   return data.data.map((item: any) => {
-    // Extraer la URL de la imagen si existe
-    let imageUrl = null;
-    if (item.image) {
-      if (typeof item.image === 'string') {
-        imageUrl = item.image;
-      } else if (item.image.url) {
-        imageUrl = `http://localhost:1337${item.image.url}`;
-      }
-    }
-
-    // Procesar el contenido de Strapi
-    let processedContent = '';
-    if (item.content) {
-      if (typeof item.content === 'string') {
-        processedContent = item.content;
-      } else if (Array.isArray(item.content)) {
-        // Si es un array de bloques de contenido (rich text), extraer el texto
-        processedContent = item.content
-          .map((block: any) => {
-            if (block.type === 'paragraph' && block.children) {
-              return `<p>${block.children.map((child: any) => child.text || '').join('')}</p>`;
-            } else if (block.type === 'heading' && block.children) {
-              const level = block.level || 2;
-              const text = block.children
-                .map((child: any) => child.text || '')
-                .join('');
-              return `<h${level}>${text}</h${level}>`;
-            } else if (block.type === 'list' && block.children) {
-              const listItems = block.children
-                .map((child: any) => {
-                  if (child.children) {
-                    return `<li>${child.children.map((grandchild: any) => grandchild.text || '').join('')}</li>`;
-                  }
-                  return '';
-                })
-                .join('');
-              return block.format === 'ordered'
-                ? `<ol>${listItems}</ol>`
-                : `<ul>${listItems}</ul>`;
-            }
-            return '';
-          })
-          .join('');
-      } else {
-        // Si es un objeto, intentar convertirlo a string
-        processedContent = JSON.stringify(item.content);
-      }
-    }
-
+    const attrs = item.attributes;
     return {
       id: item.id.toString(),
-      title: item.title,
-      description: item.description,
-      category: item.category,
-      slug: item.slug,
-      publishDate: new Date(item.publishDate),
-      author: item.author,
-      image: imageUrl,
-      tags: item.tags || [],
-      content: processedContent,
-      featured: item.featured || false,
-      readTime: item.readtime || item.readTime,
+      title: attrs.title,
+      description: attrs.description,
+      category: attrs.category,
+      slug: attrs.slug,
+      publishDate: new Date(attrs.publishDate),
+      author: attrs.author,
+      image: attrs.image,
+      tags: attrs.tags || [],
+      content: attrs.content || '',
+      featured: attrs.featured || false,
+      readTime: attrs.readTime,
     };
   });
 }

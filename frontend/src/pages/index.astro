@@ -13,11 +13,12 @@ const siteContent = await getSiteContent();
 const featuredPosts = await getFeaturedBlogPosts();
 const featuredProducts = await getFeaturedProducts();
 
+// Extraer datos directamente de Strapi (sin valores por defecto)
 const { hero, sections } = siteContent;
 ---
 
 <BaseLayout
-  title='LDTx - Tu guía para una vida saludable'
+  title='LDTx - Tu guía para una vida saludabl'
   description='Descubre productos saludables y consejos para transformar tu bienestar. Blog especializado en cocina saludable y productos afiliados cuidadosamente seleccionados.'
 >
   <!-- Hero Section -->
@@ -25,15 +26,15 @@ const { hero, sections } = siteContent;
     <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
       <div class='text-center'>
         <h1 class='hero-title'>
-          {hero.title}
-          <span class='text-primary-600'>{hero.titleHighlight}</span>
+          {hero?.title}
+          <span class='text-primary-600'>{hero?.titleHighlight}</span>
         </h1>
         <p class='lead-text mb-8 max-w-3xl mx-auto'>
-          {hero.subtitle}
+          {hero?.subtitle}
         </p>
         <div class='flex flex-col sm:flex-row gap-4 justify-center'>
           {
-            hero.ctaButtons.map((button) => (
+            hero?.ctaButtons?.map((button) => (
               <a
                 href={button.href}
                 class={
@@ -55,9 +56,11 @@ const { hero, sections } = siteContent;
   <section class='py-16 bg-white'>
     <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
       <div class='mb-12'>
-        <h2 class='title-section text-gray-900 mb-4'>{sections.blog.title}</h2>
+        <h2 class='title-section text-gray-900 mb-4'>
+          {sections?.blog?.title}
+        </h2>
         <p class='body-text text-gray-600 max-w-2xl'>
-          {sections.blog.subtitle}
+          {sections?.blog?.subtitle}
         </p>
       </div>
 
@@ -65,17 +68,21 @@ const { hero, sections } = siteContent;
         {featuredPosts.map((post) => <BlogCard post={post} />)}
 
         <!-- Teaser card para más artículos -->
-        <div class='card'>
-          <div class='card-body text-center'>
-            <h3 class='card-title'>{sections.blog.moreArticles.title}</h3>
-            <p class='card-description'>
-              {sections.blog.moreArticles.description}
-            </p>
-            <a href='/blog/' class='btn-primary'
-              >{sections.blog.moreArticles.ctaText}</a
-            >
-          </div>
-        </div>
+        {
+          sections?.blog?.moreArticles && (
+            <div class='card'>
+              <div class='card-body text-center'>
+                <h3 class='card-title'>{sections.blog.moreArticles.title}</h3>
+                <p class='card-description'>
+                  {sections.blog.moreArticles.description}
+                </p>
+                <a href='/blog/' class='btn-primary'>
+                  {sections.blog.moreArticles.ctaText}
+                </a>
+              </div>
+            </div>
+          )
+        }
       </div>
     </div>
   </section>
@@ -85,10 +92,10 @@ const { hero, sections } = siteContent;
     <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
       <div class='text-center mb-12'>
         <h2 class='title-section text-gray-900 mb-4'>
-          {sections.products.title}
+          {sections?.products?.title}
         </h2>
         <p class='body-text text-gray-600 max-w-2xl mx-auto'>
-          {sections.products.subtitle}
+          {sections?.products?.subtitle}
         </p>
       </div>
 
@@ -96,19 +103,23 @@ const { hero, sections } = siteContent;
         {featuredProducts.map((product) => <ProductCard product={product} />)}
 
         <!-- Teaser card para más productos -->
-        <div class='card'>
-          <div class='card-body text-center'>
-            <h3 class='card-title'>
-              {sections.products.catalogComplete.title}
-            </h3>
-            <p class='card-description'>
-              {sections.products.catalogComplete.description}
-            </p>
-            <a href='/productos/' class='btn-primary'>
-              {sections.products.catalogComplete.ctaText}
-            </a>
-          </div>
-        </div>
+        {
+          sections?.products?.catalogComplete && (
+            <div class='card'>
+              <div class='card-body text-center'>
+                <h3 class='card-title'>
+                  {sections.products.catalogComplete.title}
+                </h3>
+                <p class='card-description'>
+                  {sections.products.catalogComplete.description}
+                </p>
+                <a href='/productos/' class='btn-primary'>
+                  {sections.products.catalogComplete.ctaText}
+                </a>
+              </div>
+            </div>
+          )
+        }
       </div>
     </div>
   </section>
