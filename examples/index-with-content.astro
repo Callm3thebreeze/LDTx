@@ -1,4 +1,5 @@
 ---
+// Ejemplo de cómo usar el contenido centralizado en index.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogCard from '../components/BlogCard.astro';
 import ProductCard from '../components/ProductCard.astro';
@@ -21,14 +22,16 @@ const { hero, sections } = siteContent;
   description='Descubre productos saludables y consejos para transformar tu bienestar. Blog especializado en cocina saludable y productos afiliados cuidadosamente seleccionados.'
 >
   <!-- Hero Section -->
-  <section class='bg-accent-100 py-16 lg:py-24'>
+  <section
+    class='bg-gradient-to-br from-primary-50 to-primary-100 py-16 lg:py-24'
+  >
     <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
       <div class='text-center'>
-        <h1 class='hero-title'>
+        <h1 class='hero-title text-gray-900 mb-6'>
           {hero.title}
           <span class='text-primary-600'>{hero.titleHighlight}</span>
         </h1>
-        <p class='lead-text mb-8 max-w-3xl mx-auto'>
+        <p class='lead-text text-gray-600 mb-8 max-w-3xl mx-auto'>
           {hero.subtitle}
         </p>
         <div class='flex flex-col sm:flex-row gap-4 justify-center'>
@@ -54,9 +57,11 @@ const { hero, sections } = siteContent;
   <!-- Blog Section -->
   <section class='py-16 bg-white'>
     <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-      <div class='mb-12'>
-        <h2 class='title-section text-gray-900 mb-4'>{sections.blog.title}</h2>
-        <p class='body-text text-gray-600 max-w-2xl'>
+      <div class='text-center mb-12'>
+        <h2 class='title-section text-gray-900 mb-4'>
+          {sections.blog.title}
+        </h2>
+        <p class='body-text text-gray-600 max-w-2xl mx-auto'>
           {sections.blog.subtitle}
         </p>
       </div>
@@ -67,13 +72,15 @@ const { hero, sections } = siteContent;
         <!-- Teaser card para más artículos -->
         <div class='card'>
           <div class='card-body text-center'>
-            <h3 class='card-title'>{sections.blog.moreArticles.title}</h3>
+            <h3 class='card-title'>
+              {sections.blog.moreArticles.title}
+            </h3>
             <p class='card-description'>
               {sections.blog.moreArticles.description}
             </p>
-            <a href='/blog/' class='btn-primary'
-              >{sections.blog.moreArticles.ctaText}</a
-            >
+            <a href='/blog/' class='btn-primary'>
+              {sections.blog.moreArticles.ctaText}
+            </a>
           </div>
         </div>
       </div>
@@ -81,7 +88,7 @@ const { hero, sections } = siteContent;
   </section>
 
   <!-- Products Section -->
-  <section class='py-16'>
+  <section class='py-16 bg-gray-50'>
     <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
       <div class='text-center mb-12'>
         <h2 class='title-section text-gray-900 mb-4'>
@@ -110,6 +117,21 @@ const { hero, sections } = siteContent;
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class='py-16 bg-primary-600'>
+    <div class='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
+      <h2 class='title-section text-white mb-4'>
+        {sections.cta.title}
+      </h2>
+      <p class='lead-text text-primary-100 mb-8'>
+        {sections.cta.subtitle}
+      </p>
+      <a href='/contacto/' class='btn-outline-secondary btn-large'>
+        {sections.cta.ctaText}
+      </a>
     </div>
   </section>
 </BaseLayout>

@@ -10,6 +10,7 @@ export interface BlogPost {
   tags: string[];
   content: string;
   featured?: boolean;
+  readTime?: string;
 }
 
 export interface Product {
@@ -30,6 +31,9 @@ export interface Product {
   tags: string[];
   inStock: boolean;
   featured?: boolean;
+  brand?: string;
+  warranty?: string;
+  specifications?: Record<string, string>;
 }
 
 export interface Category {

@@ -1,16 +1,15 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getBlogPosts } from '../../../utils/content';
 
-const post = {
-  title: 'Sartenes sin teflón: La revolución de la cocina saludable',
-  description: 'Descubre por qué cambiar a sartenes sin teflón puede transformar tu cocina y mejorar tu salud. Comparamos materiales y te damos las mejores recomendaciones.',
-  category: 'cocina',
-  publishDate: new Date('2024-12-15'),
-  author: 'María González',
-  image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=600&fit=crop',
-  tags: ['cocina saludable', 'utensilios', 'salud'],
-  readTime: '8 min'
-};
+// Cargar el post específico desde JSON
+const allPosts = await getBlogPosts();
+const post = allPosts.find(p => p.slug === 'sartenes-sin-teflon');
+
+// Si no encontramos el post, redirigir a 404
+if (!post) {
+  return Astro.redirect('/404');
+}
 ---
 
 <BaseLayout

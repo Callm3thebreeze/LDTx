@@ -1,140 +1,16 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ProductCard from '../../../components/ProductCard.astro';
-import type { Product } from '../../../types';
+import {
+  getProductsByCategory,
+  getSubcategoriesByCategory,
+} from '../../../utils/content';
 
-// Productos de cocina
-const cocinaProducts: Product[] = [
-  {
-    id: '1',
-    name: 'Sartén Cerámica Premium 28cm',
-    description:
-      'Sartén antiadherente de cerámica libre de PFOA y PTFE. Perfecta para una cocina saludable.',
-    category: 'cocina',
-    subcategory: 'sartenes',
-    slug: 'sarten-ceramica-premium-28cm',
-    price: 59.99,
-    originalPrice: 79.99,
-    affiliateLink: 'https://ejemplo.com/sarten-ceramica',
-    image:
-      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=600&fit=crop',
-    rating: 4.8,
-    reviews: 124,
-    features: [
-      'Libre de tóxicos',
-      'Fácil limpieza',
-      'Distribución uniforme del calor',
-    ],
-    tags: ['cerámica', 'antiadherente', 'saludable'],
-    inStock: true,
-    featured: true,
-  },
-  {
-    id: '2',
-    name: 'Sartén de Hierro Fundido 26cm',
-    description:
-      'Sartén de hierro fundido tradicional. Desarrolla propiedades antiadherentes naturales con el uso.',
-    category: 'cocina',
-    subcategory: 'sartenes',
-    slug: 'sarten-hierro-fundido-26cm',
-    price: 89.99,
-    affiliateLink: 'https://ejemplo.com/sarten-hierro',
-    image:
-      'https://images.unsplash.com/photo-1556909045-f3c21bf5a3a8?w=600&h=600&fit=crop',
-    rating: 4.9,
-    reviews: 67,
-    features: [
-      '100% natural',
-      'Retención excelente del calor',
-      'Dura toda la vida',
-    ],
-    tags: ['hierro fundido', 'tradicional', 'duradero'],
-    inStock: true,
-  },
-  {
-    id: '3',
-    name: 'Batidora de Vaso Sin BPA',
-    description:
-      'Batidora de vaso de alta potencia con jarra libre de BPA. Ideal para smoothies y batidos saludables.',
-    category: 'cocina',
-    subcategory: 'electrodomesticos',
-    slug: 'batidora-vaso-sin-bpa',
-    price: 149.99,
-    originalPrice: 199.99,
-    affiliateLink: 'https://ejemplo.com/batidora',
-    image:
-      'https://images.unsplash.com/photo-1585515656845-3cfe1e19c0d4?w=600&h=600&fit=crop',
-    rating: 4.7,
-    reviews: 256,
-    features: ['Sin BPA', 'Alta potencia', '10 velocidades'],
-    tags: ['batidora', 'sin-bpa', 'smoothies'],
-    inStock: true,
-    featured: true,
-  },
-  {
-    id: '4',
-    name: 'Juego de Cuchillos de Acero Inoxidable',
-    description:
-      'Set completo de cuchillos de acero inoxidable de alta calidad. Incluye tabla de corte de bambú.',
-    category: 'cocina',
-    subcategory: 'cuchillos',
-    slug: 'juego-cuchillos-acero-inoxidable',
-    price: 129.99,
-    affiliateLink: 'https://ejemplo.com/cuchillos',
-    image:
-      'https://images.unsplash.com/photo-1593618998160-e34014e67546?w=600&h=600&fit=crop',
-    rating: 4.6,
-    reviews: 89,
-    features: ['Acero japonés', 'Filo duradero', 'Tabla de bambú incluida'],
-    tags: ['cuchillos', 'acero inoxidable', 'set completo'],
-    inStock: true,
-  },
-  {
-    id: '5',
-    name: 'Vaporera de Acero Inoxidable',
-    description:
-      'Vaporera de 3 niveles para cocinar al vapor de forma saludable. Conserva nutrientes y sabor.',
-    category: 'cocina',
-    subcategory: 'utensilios',
-    slug: 'vaporera-acero-inoxidable',
-    price: 79.99,
-    affiliateLink: 'https://ejemplo.com/vaporera',
-    image:
-      'https://images.unsplash.com/photo-1556909045-f3c21bf5a3a8?w=600&h=600&fit=crop',
-    rating: 4.5,
-    reviews: 45,
-    features: ['3 niveles', 'Cocción saludable', 'Fácil limpieza'],
-    tags: ['vaporera', 'cocción saludable', 'acero inoxidable'],
-    inStock: true,
-  },
-  {
-    id: '6',
-    name: 'Tabla de Corte de Bambú Antibacteriana',
-    description:
-      'Tabla de corte ecológica de bambú con propiedades antibacterianas naturales.',
-    category: 'cocina',
-    subcategory: 'utensilios',
-    slug: 'tabla-corte-bambu-antibacteriana',
-    price: 29.99,
-    originalPrice: 39.99,
-    affiliateLink: 'https://ejemplo.com/tabla-bambu',
-    image:
-      'https://images.unsplash.com/photo-1556909114-df4d98e29e6d?w=600&h=600&fit=crop',
-    rating: 4.7,
-    reviews: 156,
-    features: ['Bambú sostenible', 'Antibacteriana', 'Resistente a cuchillos'],
-    tags: ['bambú', 'ecológico', 'antibacteriana'],
-    inStock: true,
-  },
-];
+// Cargar productos de cocina desde JSON
+const cocinaProducts = await getProductsByCategory('cocina');
 
-// Subcategorías
-const subcategories = [
-  { name: 'Sartenes', slug: 'sartenes', count: 2 },
-  { name: 'Electrodomésticos', slug: 'electrodomesticos', count: 1 },
-  { name: 'Cuchillos', slug: 'cuchillos', count: 1 },
-  { name: 'Utensilios', slug: 'utensilios', count: 2 },
-];
+// Cargar subcategorías dinámicamente
+const subcategories = await getSubcategoriesByCategory('cocina');
 ---
 
 <BaseLayout
@@ -148,13 +24,15 @@ const subcategories = [
           <ol class='flex items-center justify-center space-x-2 text-sm'>
             <li>
               <a href='/' class='text-primary-600 hover:text-primary-700'
-                >Inicio</a>
+                >Inicio</a
+              >
             </li>
             <li class='text-gray-400'>/</li>
             <li>
               <a
                 href='/productos/'
-                class='text-primary-600 hover:text-primary-700'>Productos</a>
+                class='text-primary-600 hover:text-primary-700'>Productos</a
+              >
             </li>
             <li class='text-gray-400'>/</li>
             <li class='text-gray-600'>Cocina</li>

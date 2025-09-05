@@ -1,5 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPageContent } from '../utils/content';
+
+// Cargar contenido de la página
+const aboutContent = await getPageContent('about');
 ---
 
 <BaseLayout
@@ -10,24 +14,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Header -->
     <div class='text-center mb-12'>
       <h1 class='text-4xl md:text-5xl font-bold text-gray-900 mb-6'>
-        Quiénes somos
+        {aboutContent.title}
       </h1>
       <p class='text-xl text-gray-600 max-w-2xl mx-auto'>
-        Somos un equipo apasionado por la vida saludable, dedicado a ayudarte a
-        tomar mejores decisiones para tu bienestar y el de tu familia.
+        {aboutContent.subtitle}
+        Somos un equipo apasionado por la vida saludable, dedicado a ayudarte a tomar
+        mejores decisiones para tu bienestar y el de tu familia.
       </p>
     </div>
 
     <!-- Nuestra misión -->
     <section class='mb-16'>
-      <h2 class='text-3xl font-bold text-gray-900 mb-6'>Nuestra misión</h2>
+      <h2 class='text-3xl font-bold text-gray-900 mb-6'>
+        {aboutContent.mission.title}
+      </h2>
       <div class='card'>
         <div class='card-body'>
-          <p class='card-description mb-4'>
-            En LDTx creemos que todos merecen acceso a información confiable y
-            productos de calidad para llevar una vida más saludable. Nuestra
-            misión es ser tu guía de confianza en el camino hacia el bienestar.
-          </p>
+          {
+            aboutContent.mission.content.map((paragraph) => (
+              <p class='card-description mb-4'>{paragraph}</p>
+            ))
+          }
           <p class='card-description'>
             Investigamos, probamos y seleccionamos cuidadosamente cada producto
             que recomendamos, siempre priorizando la salud, la sostenibilidad y
@@ -41,145 +48,42 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <section class='mb-16'>
       <h2 class='text-3xl font-bold text-gray-900 mb-8'>Nuestros valores</h2>
       <div class='grid grid-cols-1 md:grid-cols-2 gap-8'>
-        <div class='card'>
-          <div class='card-body'>
-            <div class='flex items-center mb-4'>
-              <span class='text-2xl mr-3'>🔍</span>
-              <h3 class='card-title'>Transparencia</h3>
+        {
+          aboutContent.values.map((value) => (
+            <div class='card'>
+              <div class='card-body'>
+                <div class='flex items-center mb-4'>
+                  <span class='text-2xl mr-3'>{value.icon}</span>
+                  <h3 class='card-title'>{value.title}</h3>
+                </div>
+                <p class='card-description'>{value.description}</p>
+              </div>
             </div>
-            <p class='card-description'>
-              Somos completamente transparentes sobre nuestras afiliaciones y
-              procesos de selección. No hay sorpresas ni agendas ocultas.
-            </p>
-          </div>
-        </div>
-
-        <div class='card'>
-          <div class='card-body'>
-            <div class='flex items-center mb-4'>
-              <span class='text-2xl mr-3'>🧪</span>
-              <h3 class='card-title'>Investigación rigurosa</h3>
-            </div>
-            <p class='card-description'>
-              Cada recomendación está respaldada por investigación científica y
-              pruebas prácticas de nuestro equipo de expertos.
-            </p>
-          </div>
-        </div>
-
-        <div class='card'>
-          <div class='card-body'>
-            <div class='flex items-center mb-4'>
-              <span class='text-2xl mr-3'>💚</span>
-              <h3 class='card-title'>Salud primero</h3>
-            </div>
-            <p class='card-description'>
-              La salud y el bienestar son nuestra prioridad número uno. No
-              comprometemos la calidad por beneficios comerciales.
-            </p>
-          </div>
-        </div>
-
-        <div class='card'>
-          <div class='card-body'>
-            <div class='flex items-center mb-4'>
-              <span class='text-2xl mr-3'>🌱</span>
-              <h3 class='card-title'>Sostenibilidad</h3>
-            </div>
-            <p class='card-description'>
-              Promovemos productos y prácticas que no solo son buenos para ti,
-              sino también para el planeta.
-            </p>
-          </div>
-        </div>
+          ))
+        }
       </div>
     </section>
-
     <!-- Nuestro proceso -->
     <section class='mb-16'>
       <h2 class='text-3xl font-bold text-gray-900 mb-8'>
-        Cómo seleccionamos nuestros productos
+        {aboutContent.process.title}
       </h2>
       <div class='space-y-6'>
-        <div class='flex items-start'>
-          <span
-            class='flex-shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-4'
-            >1</span
-          >
-          <div>
-            <h3 class='text-lg font-semibold text-gray-900 mb-2'>
-              Investigación inicial
-            </h3>
-            <p class='text-gray-600'>
-              Identificamos categorías de productos relevantes y realizamos una
-              investigación exhaustiva del mercado y la literatura científica.
-            </p>
-          </div>
-        </div>
-
-        <div class='flex items-start'>
-          <span
-            class='flex-shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-4'
-            >2</span
-          >
-          <div>
-            <h3 class='text-lg font-semibold text-gray-900 mb-2'>
-              Evaluación de criterios
-            </h3>
-            <p class='text-gray-600'>
-              Analizamos los ingredientes, materiales, procesos de fabricación y
-              certificaciones de cada producto candidato.
-            </p>
-          </div>
-        </div>
-
-        <div class='flex items-start'>
-          <span
-            class='flex-shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-4'
-            >3</span
-          >
-          <div>
-            <h3 class='text-lg font-semibold text-gray-900 mb-2'>
-              Pruebas prácticas
-            </h3>
-            <p class='text-gray-600'>
-              Cuando es posible, probamos los productos en condiciones reales
-              para evaluar su rendimiento y usabilidad.
-            </p>
-          </div>
-        </div>
-
-        <div class='flex items-start'>
-          <span
-            class='flex-shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-4'
-            >4</span
-          >
-          <div>
-            <h3 class='text-lg font-semibold text-gray-900 mb-2'>
-              Verificación de reputación
-            </h3>
-            <p class='text-gray-600'>
-              Revisamos las opiniones de usuarios, la reputación del fabricante
-              y la disponibilidad del producto.
-            </p>
-          </div>
-        </div>
-
-        <div class='flex items-start'>
-          <span
-            class='flex-shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-4'
-            >5</span
-          >
-          <div>
-            <h3 class='text-lg font-semibold text-gray-900 mb-2'>
-              Selección final
-            </h3>
-            <p class='text-gray-600'>
-              Solo los productos que pasan todos nuestros criterios llegan a
-              nuestras recomendaciones finales.
-            </p>
-          </div>
-        </div>
+        {
+          aboutContent.process.steps.map((step) => (
+            <div class='flex items-start'>
+              <span class='flex-shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-4'>
+                {step.number}
+              </span>
+              <div>
+                <h3 class='text-lg font-semibold text-gray-900 mb-2'>
+                  {step.title}
+                </h3>
+                <p class='text-gray-600'>{step.description}</p>
+              </div>
+            </div>
+          ))
+        }
       </div>
     </section>
 

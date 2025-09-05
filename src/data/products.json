@@ -1,0 +1,63 @@
+[
+  {
+    "id": "1",
+    "name": "Sartén Cerámica Premium 28cm",
+    "description": "Sartén antiadherente de cerámica libre de PFOA y PTFE. Perfecta para una cocina saludable.",
+    "category": "cocina",
+    "subcategory": "sartenes",
+    "slug": "sarten-ceramica-premium-28cm",
+    "price": 59.99,
+    "originalPrice": 79.99,
+    "affiliateLink": "https://ejemplo.com/sarten-ceramica",
+    "image": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=600&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1556909045-f3c21bf5a3a8?w=600&h=600&fit=crop"
+    ],
+    "rating": 4.8,
+    "reviews": 156,
+    "features": [
+      "100% libre de PFOA y PTFE",
+      "Recubrimiento cerámico natural",
+      "Distribución uniforme del calor",
+      "Apta para lavavajillas",
+      "Mango ergonómico resistente al calor"
+    ],
+    "tags": ["cerámica", "antiadherente", "saludable"],
+    "inStock": true,
+    "featured": true,
+    "brand": "GreenPan",
+    "warranty": "2 años",
+    "specifications": {
+      "Material": "Aluminio con recubrimiento cerámico",
+      "Diámetro": "28 cm",
+      "Altura": "5.5 cm",
+      "Peso": "1.2 kg",
+      "Apto para": "Todas las cocinas excepto inducción",
+      "Temperatura máxima": "180°C"
+    }
+  },
+  {
+    "id": "2",
+    "name": "Botella de Agua de Acero Inoxidable 750ml",
+    "description": "Botella reutilizable de acero inoxidable, libre de BPA. Mantiene las bebidas frías o calientes durante horas.",
+    "category": "salud",
+    "subcategory": "hidratación",
+    "slug": "botella-agua-acero-inoxidable",
+    "price": 24.99,
+    "affiliateLink": "https://ejemplo.com/botella-agua",
+    "image": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=600&h=600&fit=crop",
+    "rating": 4.6,
+    "reviews": 89,
+    "features": [
+      "Acero inoxidable 18/8",
+      "Libre de BPA y ftalatos",
+      "Aislamiento de doble pared",
+      "Mantiene temperatura 24h",
+      "Boca ancha para fácil limpieza"
+    ],
+    "tags": ["acero inoxidable", "reutilizable", "ecológico"],
+    "inStock": true,
+    "featured": true
+  }
+]

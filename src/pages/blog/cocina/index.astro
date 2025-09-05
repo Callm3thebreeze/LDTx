@@ -1,54 +1,10 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BlogCard from '../../../components/BlogCard.astro';
-import type { BlogPost } from '../../../types';
+import { getBlogPostsByCategory } from '../../../utils/content';
 
-// Artículos de la categoría cocina
-const cocinaPosts: BlogPost[] = [
-  {
-    id: '1',
-    title: 'Sartenes sin teflón: La revolución de la cocina saludable',
-    description:
-      'Descubre por qué cambiar a sartenes sin teflón puede transformar tu cocina y mejorar tu salud. Comparamos materiales y te damos las mejores recomendaciones.',
-    category: 'cocina',
-    slug: 'sartenes-sin-teflon',
-    publishDate: new Date('2024-12-15'),
-    author: 'María González',
-    image:
-      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop',
-    tags: ['cocina saludable', 'utensilios', 'salud'],
-    content: '',
-    featured: true,
-  },
-  {
-    id: '2',
-    title: 'Aceites saludables: Guía completa para una cocina nutritiva',
-    description:
-      'Todo lo que necesitas saber sobre aceites saludables y cómo incorporarlos en tu dieta diaria para maximizar sus beneficios.',
-    category: 'cocina',
-    slug: 'aceites-saludables-guia',
-    publishDate: new Date('2024-12-10'),
-    author: 'Carlos Ruiz',
-    image:
-      'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&h=600&fit=crop',
-    tags: ['aceites', 'nutrición', 'cocina'],
-    content: '',
-  },
-  {
-    id: '3',
-    title: 'Utensilios de cocina libres de tóxicos: Guía de compra',
-    description:
-      'Aprende a identificar y elegir utensilios de cocina que no comprometan tu salud ni la de tu familia.',
-    category: 'cocina',
-    slug: 'utensilios-libres-toxicos-guia',
-    publishDate: new Date('2024-12-05'),
-    author: 'Ana Martín',
-    image:
-      'https://images.unsplash.com/photo-1556909045-f3c21bf5a3a8?w=800&h=600&fit=crop',
-    tags: ['utensilios', 'salud', 'cocina'],
-    content: '',
-  },
-];
+// Cargar artículos de la categoría cocina desde JSON
+const cocinaPosts = await getBlogPostsByCategory('cocina');
 ---
 
 <BaseLayout
@@ -62,12 +18,14 @@ const cocinaPosts: BlogPost[] = [
           <ol class='flex items-center justify-center space-x-2 text-sm'>
             <li>
               <a href='/' class='text-primary-600 hover:text-primary-700'
-                >Inicio</a>
+                >Inicio</a
+              >
             </li>
             <li class='text-gray-400'>/</li>
             <li>
               <a href='/blog/' class='text-primary-600 hover:text-primary-700'
-                >Blog</a>
+                >Blog</a
+              >
             </li>
             <li class='text-gray-400'>/</li>
             <li class='text-gray-600'>Cocina</li>

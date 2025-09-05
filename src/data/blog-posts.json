@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "title": "Sartenes sin teflón: Tu guía completa para una cocina saludable",
+    "description": "Descubre por qué deberías evitar las sartenes con teflón y cuáles son las mejores alternativas para una cocina más saludable.",
+    "category": "cocina",
+    "slug": "sartenes-sin-teflon",
+    "publishDate": "2024-12-15T00:00:00.000Z",
+    "author": "María González",
+    "image": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop",
+    "tags": ["sartenes", "cocina", "salud"],
+    "content": "",
+    "featured": true,
+    "readTime": "8 min"
+  },
+  {
+    "id": "2",
+    "title": "Aceites saludables: Guía completa para una cocina nutritiva",
+    "description": "Todo lo que necesitas saber sobre aceites saludables y cómo incorporarlos en tu dieta diaria.",
+    "category": "cocina",
+    "slug": "aceites-saludables-guia",
+    "publishDate": "2024-12-10T00:00:00.000Z",
+    "author": "Carlos Ruiz",
+    "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&h=600&fit=crop",
+    "tags": ["aceites", "nutrición", "cocina"],
+    "content": "",
+    "featured": false,
+    "readTime": "6 min"
+  },
+  {
+    "id": "3",
+    "title": "Utensilios de cocina libres de tóxicos: Guía de compra",
+    "description": "Aprende a identificar y elegir utensilios de cocina que no comprometan tu salud ni la de tu familia.",
+    "category": "cocina",
+    "slug": "utensilios-libres-toxicos-guia",
+    "publishDate": "2024-12-05T00:00:00.000Z",
+    "author": "Ana Martín",
+    "image": "https://images.unsplash.com/photo-1556909045-f3c21bf5a3a8?w=800&h=600&fit=crop",
+    "tags": ["utensilios", "salud", "cocina"],
+    "content": "",
+    "featured": false,
+    "readTime": "7 min"
+  }
+]

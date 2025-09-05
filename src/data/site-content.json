@@ -1,0 +1,44 @@
+{
+  "hero": {
+    "title": "Tu guía para una",
+    "titleHighlight": "vida saludable",
+    "subtitle": "Descubre productos cuidadosamente seleccionados y consejos expertos para transformar tu bienestar y el de tu familia.",
+    "ctaButtons": [
+      {
+        "text": "Explorar Blog",
+        "href": "/blog/",
+        "style": "primary"
+      },
+      {
+        "text": "Ver Productos",
+        "href": "/productos/",
+        "style": "outline"
+      }
+    ]
+  },
+  "sections": {
+    "blog": {
+      "title": "Últimos artículos del blog",
+      "subtitle": "Consejos, guías y recomendaciones para llevar un estilo de vida más saludable",
+      "moreArticles": {
+        "title": "Y muchos más artículos",
+        "description": "Descubre todos nuestros consejos sobre cocina saludable, nutrición y bienestar",
+        "ctaText": "Ver todos los artículos"
+      }
+    },
+    "products": {
+      "title": "Productos recomendados",
+      "subtitle": "Productos cuidadosamente seleccionados para mejorar tu salud y bienestar",
+      "catalogComplete": {
+        "title": "Catálogo completo",
+        "description": "Explora nuestra selección completa de productos para una vida saludable",
+        "ctaText": "Ver todos los productos"
+      }
+    },
+    "cta": {
+      "title": "¿Listo para transformar tu estilo de vida?",
+      "subtitle": "Únete a miles de personas que ya han comenzado su viaje hacia una vida más saludable",
+      "ctaText": "Contáctanos"
+    }
+  }
+}

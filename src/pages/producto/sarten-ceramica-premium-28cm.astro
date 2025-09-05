@@ -1,62 +1,28 @@
 ---
-// Update the path below to the correct location of BaseLayout.astro
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProductBySlug, getProductsByCategory } from '../../utils/content';
 
-const product = {
-  id: '1',
-  name: 'Sartén Cerámica Premium 28cm',
-  description: 'Sartén antiadherente de cerámica libre de PFOA y PTFE. Perfecta para una cocina saludable con distribución uniforme del calor.',
-  category: 'cocina',
-  subcategory: 'sartenes',
-  price: 59.99,
-  originalPrice: 79.99,
-  affiliateLink: 'https://ejemplo.com/sarten-ceramica',
-  image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=800&fit=crop',
-  images: [
-    'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=800&fit=crop',
-    'https://images.unsplash.com/photo-1556909045-f3c21bf5a3a8?w=800&h=800&fit=crop',
-    'https://images.unsplash.com/photo-1556909114-df4d98e29e6d?w=800&h=800&fit=crop'
-  ],
-  rating: 4.8,
-  reviews: 124,
-  features: [
-    'Libre de PFOA, PTFE y otros químicos tóxicos',
-    'Recubrimiento cerámico duradero',
-    'Distribución uniforme del calor',
-    'Fácil limpieza y mantenimiento',
-    'Compatible con todos los tipos de cocina',
-    'Mango ergonómico resistente al calor'
-  ],
-  specifications: {
-    'Diámetro': '28 cm',
-    'Material': 'Aluminio forjado con recubrimiento cerámico',
-    'Peso': '1.2 kg',
-    'Altura': '5 cm',
-    'Mango': 'Acero inoxidable con aislamiento térmico',
-    'Compatibilidad': 'Gas, eléctrico, vitrocerámica, inducción'
-  },
-  tags: ['cerámica', 'antiadherente', 'saludable', 'sin-toxicos'],
-  inStock: true,
-  brand: 'GreenCook',
-  warranty: '2 años'
-};
+// Cargar el producto específico desde JSON
+const productSlug = 'sarten-ceramica-premium-28cm';
+const product = await getProductBySlug(productSlug);
 
-const relatedProducts = [
-  {
-    name: 'Sartén de Hierro Fundido 26cm',
-    slug: 'sarten-hierro-fundido-26cm',
-    price: 89.99,
-    image: 'https://images.unsplash.com/photo-1556909045-f3c21bf5a3a8?w=400&h=400&fit=crop',
-    rating: 4.9
-  },
-  {
-    name: 'Juego de Cuchillos de Acero Inoxidable',
-    slug: 'juego-cuchillos-acero-inoxidable',
-    price: 129.99,
-    image: 'https://images.unsplash.com/photo-1593618998160-e34014e67546?w=400&h=400&fit=crop',
-    rating: 4.6
-  }
-];
+// Si no encontramos el producto, mostrar error
+if (!product) {
+  return Astro.redirect('/404');
+}
+
+// Cargar productos relacionados (otros productos de la misma categoría, excluyendo el actual)
+const allCocinaProducts = await getProductsByCategory('cocina');
+const relatedProducts = allCocinaProducts
+  .filter(p => p.slug !== productSlug)
+  .slice(0, 3)
+  .map(p => ({
+    name: p.name,
+    slug: p.slug,
+    price: p.price,
+    image: p.image,
+    rating: p.rating
+  }));
 ---
 
 <BaseLayout

@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPageContent } from '../utils/content';
+
+const contactContent = await getPageContent('contact');
 ---
 
 <BaseLayout
@@ -10,11 +13,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Header -->
     <div class='text-center mb-12'>
       <h1 class='text-4xl md:text-5xl font-bold text-gray-900 mb-6'>
-        Contacto
+        {contactContent.header.title}
       </h1>
       <p class='text-xl text-gray-600 max-w-2xl mx-auto'>
-        ¿Tienes alguna pregunta, sugerencia o necesitas recomendaciones
-        personalizadas? Nos encantaría escucharte.
+        {contactContent.header.description}
       </p>
     </div>
 
@@ -22,7 +24,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Formulario de contacto -->
       <div>
         <h2 class='text-2xl font-bold text-gray-900 mb-6'>
-          Envíanos un mensaje
+          {contactContent.form.title}
         </h2>
 
         <form class='space-y-6'>

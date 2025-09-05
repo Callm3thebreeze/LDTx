@@ -1,0 +1,23 @@
+[
+  {
+    "id": "cocina",
+    "name": "Cocina",
+    "slug": "cocina",
+    "description": "Productos para el cuidado personal y bienestar",
+    "image": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop"
+  },
+  {
+    "id": "salud",
+    "name": "Salud y bienestar",
+    "slug": "salud",
+    "description": "Productos para el cuidado personal y bienestar",
+    "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop"
+  },
+  {
+    "id": "casa",
+    "name": "Hogar saludable",
+    "slug": "casa",
+    "description": "Productos para un hogar más saludable y sostenible",
+    "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop"
+  }
+]

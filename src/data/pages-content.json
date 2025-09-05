@@ -1,0 +1,89 @@
+{
+  "pages": {
+    "about": {
+      "title": "Quiénes somos",
+      "subtitle": "Conoce nuestro compromiso con tu bienestar",
+      "mission": {
+        "title": "Nuestra misión",
+        "content": [
+          "En LDTx creemos que todos merecen acceso a información confiable y productos de calidad para llevar una vida más saludable. Nuestra misión es ser tu guía de confianza en el camino hacia el bienestar.",
+          "Investigamos, probamos y seleccionamos cuidadosamente cada producto que recomendamos, siempre priorizando la salud, la sostenibilidad y la calidad sobre cualquier consideración comercial."
+        ]
+      },
+      "values": [
+        {
+          "icon": "🔍",
+          "title": "Transparencia",
+          "description": "Somos completamente transparentes sobre nuestras afiliaciones y procesos de selección. No hay sorpresas ni agendas ocultas."
+        },
+        {
+          "icon": "🧪",
+          "title": "Investigación rigurosa",
+          "description": "Cada recomendación está respaldada por investigación científica y pruebas prácticas de nuestro equipo de expertos."
+        },
+        {
+          "icon": "💚",
+          "title": "Salud primero",
+          "description": "La salud y el bienestar son nuestra prioridad número uno. No comprometemos la calidad por beneficios comerciales."
+        },
+        {
+          "icon": "🌱",
+          "title": "Sostenibilidad",
+          "description": "Promovemos productos y prácticas que no solo son buenos para ti, sino también para el planeta."
+        }
+      ],
+      "process": {
+        "title": "Cómo seleccionamos nuestros productos",
+        "steps": [
+          {
+            "number": 1,
+            "title": "Investigación inicial",
+            "description": "Identificamos categorías de productos relevantes y realizamos una investigación exhaustiva sobre las mejores opciones disponibles."
+          },
+          {
+            "number": 2,
+            "title": "Evaluación científica",
+            "description": "Analizamos estudios científicos, certificaciones y revisamos la composición y materiales de cada producto."
+          },
+          {
+            "number": 3,
+            "title": "Pruebas prácticas",
+            "description": "Nuestro equipo prueba personalmente los productos durante un período mínimo de 30 días."
+          },
+          {
+            "number": 4,
+            "title": "Evaluación final",
+            "description": "Solo los productos que superan todos nuestros criterios de calidad, seguridad y eficacia llegan a nuestras recomendaciones."
+          }
+        ]
+      }
+    },
+    "contact": {
+      "title": "Contacto",
+      "subtitle": "¿Tienes alguna pregunta? Estamos aquí para ayudarte",
+      "contactMethods": [
+        {
+          "icon": "📧",
+          "title": "Correo electrónico",
+          "items": [
+            {
+              "label": "Para consultas generales:",
+              "value": "hola@ldtx.com",
+              "href": "mailto:hola@ldtx.com"
+            },
+            {
+              "label": "Para colaboraciones:",
+              "value": "colaboraciones@ldtx.com",
+              "href": "mailto:colaboraciones@ldtx.com"
+            }
+          ]
+        },
+        {
+          "icon": "⏰",
+          "title": "Tiempo de respuesta",
+          "description": "Normalmente respondemos en un plazo de 24-48 horas durante días laborables. Para consultas urgentes, por favor indícalo en el asunto del mensaje."
+        }
+      ]
+    }
+  }
+}
